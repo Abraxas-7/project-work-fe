@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import './HomePageStyle.css'
 function HomePageComponent() {
   const [properties, setProperties] = useState([])
   const [loading, setLoading] = useState((true))
@@ -25,22 +25,28 @@ function HomePageComponent() {
   )
 
   return (
-    <>
+    <div className="container-fluid">
+      <div className="d-flex flex-wrap justify-content-center gap-4 m-2">
       {properties.map((property) => (
-        <div key={property.id}>
+        <div key={property.id} className="card-css" /*style={{width: '15rem'}}*/>
           <div>
-            <img src={property.first_image}/>
+            <img src={property.first_image} className="" />
           </div>
-          <h3>{property.title}</h3>
-          <p>Host e-mail:{property.contact_email}</p>
-          <p>🤍{property.likes}</p>
-          <div>
-            <p>{property.adress_city}</p>
-            <p>{property.adress_road}</p>
+          <div className="description p-3">
+            <h5>{property.title}</h5>
+            <div className="d-flex justify-content-between">
+              <p>{property.host_name}</p>
+              <p>🤍{property.likes}</p>
+            </div>
+            <div className="d-flex justify-content-between">
+              <p>{property.adress_city}</p>
+              <p>{property.adress_road}</p>
+            </div>
           </div>
         </div>
       ))}
-    </>
+      </div>
+    </div>
   )
 }
 
