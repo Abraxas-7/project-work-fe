@@ -33,7 +33,6 @@ function FooterComponent() {
           <li>Gift card</li>
           <li>Soggiorni con Airbnb.org</li>
         </ul>
-
       </div>
       <hr />
       <div className="d-flex justify-content-between">
@@ -47,14 +46,20 @@ function FooterComponent() {
         <ul className="list-unstyled d-flex gap-3 align-items-center">
           <li>italiano IT </li>
           <li>€EUR</li>
-          <li> <i className="fa-brands fa-facebook"></i></li>
-          <li><i className="fa-brands fa-twitter"></i></li>
-          <li><i className="fa-brands fa-instagram"></i>
+          <li>
+            {" "}
+            <i className="fa-brands fa-facebook"></i>
+          </li>
+          <li>
+            <i className="fa-brands fa-twitter"></i>
+          </li>
+          <li>
+            <i className="fa-brands fa-instagram"></i>
           </li>
         </ul>
       </div>
     </>
-  )
+  );
 }
 
 export default FooterComponent;

@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DefaultLayout from "./layout/DefaultLayout";
 
 import HomePage from "./pages/HomePage";
+import AddProperty from "./pages/AddProperty";
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
           <Route path="Affitta" element={<h2>Affitta</h2>} />
 
           <Route index element={<HomePage />} />
+
+          <Route path="AddProperty" element={<AddProperty />} />
         </Route>
       </Routes>
     </BrowserRouter>
