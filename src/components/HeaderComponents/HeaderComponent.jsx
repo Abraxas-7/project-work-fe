@@ -4,10 +4,10 @@ function HeaderComponent() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm p-3">
       <div className="container">
-
-        <a className="navbar-brand text-danger fw-bold" href="#">
+        {/* messo navlink come logo del sito  */}
+        <NavLink className="navbar-brand text-danger fw-bold" to="/">
           <span className="text-dark">Bool</span>bnb
-        </a>
+        </NavLink>
 
         <button
           className="navbar-toggler"

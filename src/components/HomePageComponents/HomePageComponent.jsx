@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import './HomePageStyle.css'
 import "bootstrap-icons/font/bootstrap-icons.css";
+import { NavLink } from "react-router-dom";
 
 
 
@@ -70,9 +71,9 @@ function HomePageComponent() {
       <div className="d-flex flex-wrap justify-content-center m-3 gap-3 gy-6">
         {properties.map((property) => (
           <div key={property.id_properties} className="card-css" /*style={{width: '15rem'}}*/>
-            <div>
+            <NavLink to={`/properties/${property.id_properties}`}>
               <img src={property.first_image} className="" />
-            </div>
+            </NavLink>
             <div className="description p-3">
               <h5>{property.title}</h5>
               <div className="d-flex justify-content-between">

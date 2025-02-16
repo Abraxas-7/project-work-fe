@@ -5,8 +5,8 @@ import ReviewsComponent from "../ReviewsComponents/ReviewsComponent";
 
 // import FormReviews from "../components/FormReviews";
 
-
-const apiUrl = import.meta.env.VITE_API_URL;
+//  modificato l'env di luigi ed ho messo il localhost globale per permettere a tutti quanti di vedere properties route 
+const apiUrl = "http://localhost:3000/api/";
 const PropertyEndPoint = "properties";
 console.log(apiUrl);
 
