@@ -1,6 +1,6 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import ImageUpload from "./ImageUploadComponent";
 
 function AddPropertyComponent() {
   const [formData, setFormData] = useState({
@@ -9,12 +9,15 @@ function AddPropertyComponent() {
     contact_email: "",
     rooms: "",
     bathrooms: "",
+    beds: "",
     square_meters: "",
     property_type: "",
     adress_road: "",
     adress_city: "",
     adress_hick_town: "",
   });
+
+  const [images, setImages] = useState([]);
 
   const handleChange = (e) => {
     setFormData({
@@ -23,10 +26,40 @@ function AddPropertyComponent() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     console.log(formData);
+
+    try {
+      const response1 = await axios.post(
+        "http://localhost:3000/api/properties",
+        formData
+      );
+
+      console.log("Prima risposta:", response1.data);
+
+      const newPropertyId = response1.data.properties_id;
+
+      const formDataFiles = new FormData();
+      formDataFiles.append("id", newPropertyId);
+
+      images.forEach((file) => {
+        formDataFiles.append("images", file);
+      });
+
+      const response2 = await axios.post(
+        `http://localhost:3000/api/images/${newPropertyId}/upload-images`,
+        formDataFiles,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+
+      console.log("Seconda risposta:", response2.data);
+    } catch (error) {
+      console.error("Errore nella richiesta:", error);
+    }
   };
 
   return (
@@ -75,6 +108,7 @@ function AddPropertyComponent() {
               />
             </div>
           </div>
+
           <div className="row">
             <div className="col-md-3 col-sm-6 py-3">
               <label htmlFor="rooms" className="form-label">
@@ -89,6 +123,7 @@ function AddPropertyComponent() {
                 required
               />
             </div>
+
             <div className="col-md-3 col-sm-6 py-3">
               <label htmlFor="bathrooms" className="form-label">
                 Numero di Bagni
@@ -102,6 +137,7 @@ function AddPropertyComponent() {
                 required
               />
             </div>
+
             <div className="col-md-3 col-sm-6 py-3">
               <label htmlFor="square_meters" className="form-label">
                 Metri Quadrati
@@ -115,6 +151,21 @@ function AddPropertyComponent() {
                 required
               />
             </div>
+
+            <div className="col-md-3 col-sm-6 py-3">
+              <label htmlFor="beds" className="form-label">
+                Metri Quadrati
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="beds"
+                value={formData.beds}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
             <div className="col-md-3 col-sm-6 py-3">
               <label htmlFor="property_type" className="form-label">
                 Tipo di Proprietà
@@ -183,10 +234,11 @@ function AddPropertyComponent() {
 
         <div className="py-3">
           <h2>Zona aggiunta immagine</h2>
+          <ImageUpload onFilesSelected={setImages} />
         </div>
 
         <div className="py-3 row d-flex justify-content-center">
-          <button type="submit" className="btn btn-primary col-md-8 col-sm-10">
+          <button type="submit" className="btn btn-primary">
             Aggiungi
           </button>
         </div>
