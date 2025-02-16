@@ -19,11 +19,6 @@ export default function AdvancedSearch() {
                 )
             })
     }, [])
-    const filterProperties = properties.filter(() => {
-        if (properties.adress_city) {
-            return properties.adress_city === cityName
-        }
-    })
     return (
         <>
             <section>
