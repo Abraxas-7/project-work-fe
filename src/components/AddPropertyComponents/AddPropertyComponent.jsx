@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import ImageUpload from "./ImageUploadComponent";
 
+import province from "../../data/province";
+import propertyType from "../../data/propertyType";
+
 function AddPropertyComponent() {
   const [formData, setFormData] = useState({
     title: "",
@@ -69,6 +72,7 @@ function AddPropertyComponent() {
           <h1>Aggiungi una nuova Proprietà</h1>
           <p className="lead py-3">
             Compila il form inserendo i dati della proprietà da aggiungere
+            (tutti i campi sono obbligatori)
           </p>
         </div>
 
@@ -221,16 +225,26 @@ function AddPropertyComponent() {
 
           <div className="col-md-2 col-sm-6 py-3">
             <label htmlFor="adress_hick_town" className="form-label">
-              Frazione
+              Provincia
             </label>
-            <input
-              type="text"
-              className="form-control"
+            <select
+              className={"form-select"}
+              style={{
+                maxHeight: "150px",
+                overflowY: "auto",
+              }}
               id="adress_hick_town"
               value={formData.adress_hick_town}
               onChange={handleChange}
               required
-            />
+            >
+              <option value="">Seleziona...</option>
+              {province.map((provincia) => (
+                <option key={provincia.code} value={provincia.code}>
+                  {provincia.name} ({provincia.code})
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="col-md-3 col-sm-6 py-3">
@@ -239,15 +253,21 @@ function AddPropertyComponent() {
             </label>
             <select
               className="form-select"
+              style={{
+                maxHeight: "150px",
+                overflowY: "auto",
+              }}
               id="property_type"
               value={formData.property_type}
               onChange={handleChange}
               required
             >
               <option value="">Seleziona...</option>
-              <option value="appartamento">Appartamento</option>
-              <option value="villa">Villa</option>
-              <option value="monolocale">Monolocale</option>
+              {propertyType.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
             </select>
           </div>
         </div>
