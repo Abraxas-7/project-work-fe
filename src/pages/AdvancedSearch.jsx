@@ -34,9 +34,9 @@ export default function AdvancedSearch() {
             return (
                 item.adress_city.toLowerCase().includes(inputValue.toLowerCase()) &&
                 (!bedsNum || item.beds >= bedsNum) &&
-                (!bathNum || item.baths >= bathNum) &&
-                (!minmq || item.sq_meters >= minmq) &&
-                (!maxmq || item.sq_meters <= maxmq) &&
+                (!bathNum || item.bathrooms >= bathNum) &&
+                (!minmq || item.square_meters >= minmq) &&
+                (!maxmq || item.square_meters <= maxmq) &&
                 (Object.keys(houseType).length === 0 || houseType[item.property_type])
             );
         });
