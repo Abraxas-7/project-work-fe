@@ -65,7 +65,15 @@ function AddPropertyComponent() {
   return (
     <div className="container py-5">
       <form onSubmit={handleSubmit}>
-        <h2>Dettagli Proprietà</h2>
+        <div className="text-center py-3">
+          <h1>Aggiungi una nuova Proprietà</h1>
+          <p className="lead py-3">
+            Compila il form inserendo i dati della proprietà da aggiungere
+          </p>
+        </div>
+
+        <h3>Dettagli Proprietà</h3>
+
         <div className="py-3">
           <div className="py-3">
             <label htmlFor="title" className="form-label">
@@ -77,9 +85,11 @@ function AddPropertyComponent() {
               id="title"
               value={formData.title}
               onChange={handleChange}
+              maxLength="255"
               required
             />
           </div>
+
           <div className="row">
             <div className="col-md-6 py-3">
               <label htmlFor="host_name" className="form-label">
@@ -91,9 +101,11 @@ function AddPropertyComponent() {
                 id="host_name"
                 value={formData.host_name}
                 onChange={handleChange}
+                maxLength="50"
                 required
               />
             </div>
+
             <div className="col-md-6 py-3">
               <label htmlFor="contact_email" className="form-label">
                 Inserisci l'email che gli utenti useranno per contattarti
@@ -120,6 +132,8 @@ function AddPropertyComponent() {
                 id="rooms"
                 value={formData.rooms}
                 onChange={handleChange}
+                min="1"
+                max="255"
                 required
               />
             </div>
@@ -134,6 +148,8 @@ function AddPropertyComponent() {
                 id="bathrooms"
                 value={formData.bathrooms}
                 onChange={handleChange}
+                min="1"
+                max="255"
                 required
               />
             </div>
@@ -148,13 +164,15 @@ function AddPropertyComponent() {
                 id="square_meters"
                 value={formData.square_meters}
                 onChange={handleChange}
+                min="1"
+                max="1000000"
                 required
               />
             </div>
 
             <div className="col-md-3 col-sm-6 py-3">
               <label htmlFor="beds" className="form-label">
-                Metri Quadrati
+                Numero letti
               </label>
               <input
                 type="number"
@@ -162,32 +180,16 @@ function AddPropertyComponent() {
                 id="beds"
                 value={formData.beds}
                 onChange={handleChange}
+                min="1"
+                max="255"
                 required
               />
-            </div>
-
-            <div className="col-md-3 col-sm-6 py-3">
-              <label htmlFor="property_type" className="form-label">
-                Tipo di Proprietà
-              </label>
-              <select
-                className="form-select"
-                id="property_type"
-                value={formData.property_type}
-                onChange={handleChange}
-                required
-              >
-                <option value="">Seleziona...</option>
-                <option value="appartamento">Appartamento</option>
-                <option value="villa">Villa</option>
-                <option value="monolocale">Monolocale</option>
-              </select>
             </div>
           </div>
         </div>
 
         <div className="row py-3">
-          <h4>Indirizzo Proprietà</h4>
+          <h3>Indirizzo Proprietà</h3>
 
           <div className="py-3">
             <label htmlFor="adress_road" className="form-label">
@@ -203,7 +205,7 @@ function AddPropertyComponent() {
             />
           </div>
 
-          <div className="py-3 col-md-10 col-sm-8">
+          <div className="py-3 col-md-7">
             <label htmlFor="adress_city" className="form-label">
               Città
             </label>
@@ -217,7 +219,7 @@ function AddPropertyComponent() {
             />
           </div>
 
-          <div className="col-md-2 col-sm-4 py-3">
+          <div className="col-md-2 col-sm-6 py-3">
             <label htmlFor="adress_hick_town" className="form-label">
               Frazione
             </label>
@@ -230,10 +232,28 @@ function AddPropertyComponent() {
               required
             />
           </div>
+
+          <div className="col-md-3 col-sm-6 py-3">
+            <label htmlFor="property_type" className="form-label">
+              Tipo di Proprietà
+            </label>
+            <select
+              className="form-select"
+              id="property_type"
+              value={formData.property_type}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Seleziona...</option>
+              <option value="appartamento">Appartamento</option>
+              <option value="villa">Villa</option>
+              <option value="monolocale">Monolocale</option>
+            </select>
+          </div>
         </div>
 
         <div className="py-3">
-          <h2>Zona aggiunta immagine</h2>
+          <h3>Zona aggiunta immagine</h3>
           <ImageUpload onFilesSelected={setImages} />
         </div>
 
