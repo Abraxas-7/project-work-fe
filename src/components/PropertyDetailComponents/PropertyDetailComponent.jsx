@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import ReviewsComponent from "../ReviewsComponents/ReviewsComponent";
-
-// import FormReviews from "../components/FormReviews";
+import FormReviews from "../ReviewsComponents/FormReviewComponent";
+import ContactForm from "./ContactFormComponent";
 
 
 const apiUrl = import.meta.env.VITE_API_URL;
@@ -73,7 +73,7 @@ export default function PropertyDetails() {
                             <p><strong>Mi piace:</strong> {property.likes}</p>
                             <p><strong>Città:</strong> {property.adress_city}</p>
                             <p><strong>Indirizzo:</strong> {property.adress_road}</p>
-                            <p><strong>Town:</strong> {property.adress_hick_town}</p>
+                            <p><strong>Provincia:</strong> {property.adress_hick_town}</p>
                             <button className="btn btn-primary">Contatta</button>
                         </div>
                     </div>
@@ -89,9 +89,15 @@ export default function PropertyDetails() {
                 </div>
             </section>
 
-            {/* <section className="container-fluid py-4">
-                <FormReviews property_id={property?.id} reloadReviews={getData} />
-            </section> */}
+            <section className="container-fluid py-4">
+                <FormReviews properties_id={property.id} reloadReviews={getData} />
+            </section>
+
+            <section className="container-fluid py-4">
+
+                <ContactForm />
+
+            </section>
         </>
     )
 };
