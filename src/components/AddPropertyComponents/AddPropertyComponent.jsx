@@ -120,6 +120,7 @@ function AddPropertyComponent() {
                 id="contact_email"
                 value={formData.contact_email}
                 onChange={handleChange}
+                maxLength="255"
                 required
               />
             </div>
@@ -205,6 +206,7 @@ function AddPropertyComponent() {
               id="adress_road"
               value={formData.adress_road}
               onChange={handleChange}
+              maxLength="255"
               required
             />
           </div>
@@ -219,6 +221,7 @@ function AddPropertyComponent() {
               id="adress_city"
               value={formData.adress_city}
               onChange={handleChange}
+              maxLength="255"
               required
             />
           </div>

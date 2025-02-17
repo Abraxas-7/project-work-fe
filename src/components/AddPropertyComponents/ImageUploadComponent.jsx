@@ -7,17 +7,21 @@ import style from "./ImageUploadComponent.module.css";
 function ImageUpload({ onFilesSelected }) {
   const [images, setImages] = useState([]);
 
+  const maxImages = 20;
+
   const { getRootProps, getInputProps } = useDropzone({
     multiple: true,
-    accept: "image/*",
+    accept: ".jpg, .jpeg, .png",
     onDrop: (acceptedFiles) => {
-      setImages((prevImages) => {
-        const updatedImages = [...prevImages, ...acceptedFiles];
-
-        onFilesSelected(updatedImages);
-
-        return updatedImages;
-      });
+      if (images.length + acceptedFiles.length <= maxImages) {
+        setImages((prevImages) => {
+          const updatedImages = [...prevImages, ...acceptedFiles];
+          onFilesSelected(updatedImages);
+          return updatedImages;
+        });
+      } else {
+        alert(`Puoi caricare al massimo ${maxImages} immagini.`);
+      }
     },
   });
 
@@ -33,7 +37,6 @@ function ImageUpload({ onFilesSelected }) {
 
   useEffect(() => {
     return () => {
-      // Revoca gli oggetti URL quando il componente viene smontato
       images.forEach((file) => URL.revokeObjectURL(file.preview));
     };
   }, [images]);
