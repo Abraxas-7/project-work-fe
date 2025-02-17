@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const initialData = {
@@ -12,9 +13,9 @@ const initialData = {
 const apiUrl = import.meta.env.VITE_API_URL;
 const propertyEndPoint = "properties";
 
-export default function FormReviews({ properties_id, reloadReviews }) {
-
-    console.log("Property ID:", properties_id);
+export default function FormReviews({ reloadReviews }) {
+    const { id } = useParams();
+    console.log("ID:", id);
     const [formData, setFormData] = useState(initialData);
     const [isFormValid, setFormValid] = useState(true);
 
@@ -47,7 +48,7 @@ export default function FormReviews({ properties_id, reloadReviews }) {
         }
 
         // Logica per inviare i dati al proprio API
-        axios.post(`${apiUrl}${propertyEndPoint}/${properties_id}/reviews`, formData)
+        axios.post(`${apiUrl}${propertyEndPoint}/${id}/reviews`, formData)
             .then((res) => {
                 console.log(res);
                 setFormValid(true);

@@ -14,6 +14,8 @@ console.log(apiUrl);
 export default function PropertyDetails() {
     const { id } = useParams();
     const [property, setProperty] = useState({});
+    console.log(property);
+
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -90,7 +92,7 @@ export default function PropertyDetails() {
             </section>
 
             <section className="container-fluid py-4">
-                <FormReviews properties_id={property.id} reloadReviews={getData} />
+                <FormReviews properties_id={property.id_properties} reloadReviews={getData} />
             </section>
 
             <section className="container-fluid py-4">
