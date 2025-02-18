@@ -7,7 +7,7 @@ import style from "./ImageUploadComponent.module.css";
 function ImageUpload({ onFilesSelected }) {
   const [images, setImages] = useState([]);
 
-  const maxImages = 20;
+  const maxImages = 30;
 
   const { getRootProps, getInputProps } = useDropzone({
     multiple: true,
@@ -47,7 +47,9 @@ function ImageUpload({ onFilesSelected }) {
         <input {...getInputProps()} />
         <div>
           <FaCloudUploadAlt className={style.icon} />
-          <p>Trascina qui le immagini o clicca per selezionarle (Max 20)</p>
+          <p>
+            Trascina qui le immagini o clicca per selezionarle (Max {maxImages})
+          </p>
         </div>
       </div>
 
