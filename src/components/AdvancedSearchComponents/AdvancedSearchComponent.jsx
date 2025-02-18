@@ -44,11 +44,12 @@ export default function AdvancedSearchComponent() {
                 (!bathNum || item.bathrooms == bathNum) &&
                 (!minmq || item.square_meters >= minmq) &&
                 (!maxmq || item.square_meters <= maxmq) &&
-                (Object.keys(houseType).length === 0 || houseType[item.property_type])
+                (!formData.adress_hick_town || item.adress_hick_town == formData.adress_hick_town) &&
+                (!formData.property_type || item.property_type == formData.property_type)
             );
         });
         setFilteredProperties(filtered);
-    }, [inputValue, bedsNum, bathNum, minmq, maxmq, houseType, properties]);
+    }, [inputValue, bedsNum, bathNum, minmq, maxmq, properties, formData.adress_hick_town, formData.property_type]);
 
     const handleInputChange = (event) => {
         setInputValue(event.target.value);
