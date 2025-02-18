@@ -47,7 +47,7 @@ function ImageUpload({ onFilesSelected }) {
         <input {...getInputProps()} />
         <div>
           <FaCloudUploadAlt className={style.icon} />
-          <p>Trascina qui le immagini o clicca per selezionarle</p>
+          <p>Trascina qui le immagini o clicca per selezionarle (Max 20)</p>
         </div>
       </div>
 
