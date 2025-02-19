@@ -70,7 +70,7 @@ function HomePageComponent() {
           >
             <NavLink to={`/properties/${property.id_properties}`}>
               <img
-                src={`http://localhost:3000${property.first_image}`}
+                src={`http://localhost:3000${`http://localhost:3000${property.first_image}`}`}
                 className=""
               />
             </NavLink>

@@ -197,7 +197,7 @@ export default function AdvancedSearchComponent() {
                     {filteredProperties.map((property) => (
                         <div key={property.id_properties} className="card-css">
                             <div>
-                                <img src={property.first_image} alt={property.title} />
+                                <img src={`http://localhost:3000${property.first_image}`} alt={property.title} />
                             </div>
                             <div className="description p-3">
                                 <h5>{property.title}</h5>
