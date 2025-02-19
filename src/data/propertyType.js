@@ -3,6 +3,7 @@ const propertyTypes = [
   "Monolocale",
   "Villa",
   "Loft",
+  "Lodge",
   "Bungalow",
   "Casa a schiera",
   "Casa indipendente",
@@ -10,6 +11,7 @@ const propertyTypes = [
   "Casale",
   "Chalet",
   "Cottage",
+  "Castello",
   "Townhouse",
   "Penthouse",
 ];
