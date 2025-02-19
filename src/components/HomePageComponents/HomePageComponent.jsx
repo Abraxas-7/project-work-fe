@@ -72,7 +72,7 @@ function HomePageComponent() {
         {properties.map((property) => (
           <div key={property.id_properties} className="card-css" /*style={{width: '15rem'}}*/>
             <NavLink to={`/properties/${property.id_properties}`}>
-              <img src={property.first_image} className="" />
+              <img src={`http://localhost:3000${property.first_image}`} className="" />
             </NavLink>
             <div className="description p-3">
               <h5>{property.title}</h5>
