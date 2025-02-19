@@ -3,10 +3,14 @@ import style from "./FooterComponent.module.css";
 function FooterComponent() {
   return (
     <div className={style.footerContainer}>
-      <div className="d-flex justify-content-center align-items-center">
-        <p className="text-white fw-bold">
-          © 2023 BoolBnB, Inc. All rights reserved.
-        </p>
+      <div className="d-flex flex-column justify-content-center align-items-center p-5">
+        <h3>BoolBnB</h3>
+        <p></p>
+        <ul>
+          <li>
+            <a href="#"></a>
+          </li>
+        </ul>
       </div>
     </div>
   );
