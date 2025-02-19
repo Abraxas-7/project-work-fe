@@ -52,7 +52,7 @@ export default function ContactForm() {
                 console.log('Risposta dell API:', res);
                 setFormValid(true);
                 setFormData(contactData);
-                reloadEmail();
+                // reloadEmail();
                 setMessage("Il tuo messaggio è stato inviato con successo!");
                 setShowInterestMessage(true);
             })
