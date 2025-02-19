@@ -4,7 +4,7 @@ function FooterComponent() {
   return (
     <>
       <hr />
-      <div className="d-flex justify-content-around">
+      <div className="d-flex justify-content-around ">
         <ul className="list-unstyled">
           <span className="fw-bold">Assistenza</span>
           <li>Centro assistenza </li>
@@ -19,14 +19,14 @@ function FooterComponent() {
           <li>Ospitare responsabilmente</li>
         </ul>
         <ul className="list-unstyled">
-          <span className="fw-bold">AirBnB</span>
+          <span className="fw-bold">BoolBnB</span>
           <li>Newsroom</li>
           <li>Nuove funzionalità</li>
           <li>Soggiorni con BoolBnb</li>
         </ul>
       </div>
       <hr />
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between ms-5 me-5 "  >
         <ul className="list-unstyled d-flex gap-3">
           <li>© 2025 Boolbnb, Inc</li>
           <li>privacy</li>
@@ -49,6 +49,7 @@ function FooterComponent() {
           </li>
         </ul>
       </div>
+
     </>
   );
 }
