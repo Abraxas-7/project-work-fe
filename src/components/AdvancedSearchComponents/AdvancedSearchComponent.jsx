@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import "./AdvancedSearchStyle.css"
 import { useState, useEffect } from "react";
 import province from "../../data/province";
 import propertyType from "../../data/propertyType";
@@ -82,9 +81,16 @@ export default function AdvancedSearchComponent() {
 
     return (
         <>
-            <h1>Ricerca avanzata</h1>
-            <div id="container">
-                <form onSubmit={handleSubmit}>
+            <h1 className="my-6 mx-auto" style={{
+                width: "80%",
+                color: "#dc3545"
+            }}>Ricerca avanzata</h1>
+            <div id="container" className="d-flex justify-content-evenly my-5 mx-auto" style={{ width: "85%" }}>
+                <form style={{
+                    width: "20%",
+                    marginLeft: "50px",
+                    marginRight: "50px"
+                }} onSubmit={handleSubmit}>
                     <div className="mb-2">
                         <label htmlFor="adress_hick_town" className="form-label">
                             Provincia
@@ -193,7 +199,7 @@ export default function AdvancedSearchComponent() {
 
 
                 </form >
-                <section>
+                <section className="d-flex flex-wrap justify-content-evenly" style={{ width: "75%" }}>
                     {filteredProperties.map((property) => (
                         <div key={property.id_properties} className="card-css">
                             <div>
@@ -214,9 +220,9 @@ export default function AdvancedSearchComponent() {
                             </div>
                         </div>
                     ))}
-                    <h5 className={noResults()}>Nessuna Proprietà soddisfa i requisiti cercati</h5>
+                    <h5 className={noResults()} style={{ color: "rgb(129, 129, 129" }}>Nessuna proprietà soddisfa i requisiti cercati</h5>
                 </section>
-            </div>
+            </div >
 
         </>
     );
