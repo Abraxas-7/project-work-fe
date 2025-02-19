@@ -20,7 +20,6 @@ export default function FormReviews({ reloadReviews }) {
     const [isFormValid, setFormValid] = useState(true);
 
 
-    // Funzione di validazione
     function validateForm() {
         if (!formData.user_name) {
             setErrorMessage("Il nome utente è obbligatorio.");
@@ -38,7 +37,7 @@ export default function FormReviews({ reloadReviews }) {
     }
 
 
-    // Funzione di invio del form
+
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -47,13 +46,13 @@ export default function FormReviews({ reloadReviews }) {
             return;
         }
 
-        // Logica per inviare i dati al proprio API
+
         axios.post(`${apiUrl}${propertyEndPoint}/${id}/reviews`, formData)
             .then((res) => {
                 console.log(res);
                 setFormValid(true);
-                setFormData(initialData); // resetta il form
-                reloadReviews(); // ricarica le recensioni
+                setFormData(initialData);
+                reloadReviews();
             })
             .catch((error) => {
                 console.log(error);
@@ -61,8 +60,6 @@ export default function FormReviews({ reloadReviews }) {
             .finally(() => {
                 console.log("finito");
             });
-
-
     }
 
     function setFieldValue(e) {
@@ -72,10 +69,10 @@ export default function FormReviews({ reloadReviews }) {
 
     }
     return (
-        <div className="card">
-            <header className="card-header">
-                <h5>Aggiungi la tua recensione</h5>
-            </header>
+        <div className="card text-white bg-danger mb-3">
+            <div className="card-header">
+                <h5>Come è andato il tuo soggiorno?</h5>
+            </div>
             <div className="card-body">
                 {!isFormValid && (
                     <div className="alert alert-danger mb-3">
@@ -85,51 +82,57 @@ export default function FormReviews({ reloadReviews }) {
 
                 <form
                     onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label>User Name</label>
+                    <div className="form-group mb-3">
                         <input
                             type="text"
                             name="user_name"
                             className="form-control"
+                            placeholder="Inserisci il tuo nome utente"
                             value={formData.user_name}
                             onChange={setFieldValue}
                         />
-
                     </div>
-                    <div className="form-group">
-                        <label>Review</label>
+
+                    <div className="form-group mb-3">
                         <textarea
                             className="form-control"
                             name="review_content"
+                            placeholder="Scrivi la tua recensione"
                             value={formData.review_content}
                             onChange={setFieldValue}
                         />
-
                     </div>
 
-                    <div className="form-group">
-                        <label>Data Inizio</label>
-                        <input
-                            type="date"
-                            name="start_date"
-                            className="form-control"
-                            value={formData.start_date}
-                            onChange={setFieldValue}
-                        />
+                    <div className="form-group d-flex gap-1">
+                        <div className="col-6">
+                            {/* <label for="start_date">Check-in</label> */}
+                            <input
+                                type="date"
+                                name="start_date"
+                                className="form-control"
+                                placeholder="check-in"
+                                value={formData.start_date}
+                                onChange={setFieldValue}
+                            />
+
+                        </div>
+                        <div className="col-6">
+                            {/* <label for="end_date">Check-out</label> */}
+                            <input
+                                type="date"
+                                name="end_date"
+                                className="form-control"
+
+                                value={formData.end_date}
+                                onChange={setFieldValue}
+                            />
+
+                        </div>
+
                     </div>
-                    <div className="form-group">
-                        <label>Data Fine</label>
-                        <input
-                            type="date"
-                            name="end_date"
-                            className="form-control"
-                            value={formData.end_date}
-                            onChange={setFieldValue}
-                        />
-                    </div>
-                    <div className="d-flex justify-content-end pt-3">
-                        <button type="submit" className="btn btn-primary">
-                            Send
+                    <div className="d-flex pt-3">
+                        <button type="submit" className="btn btn-light text-dark">
+                            Invia la tua recensione
                         </button>
                     </div>
                 </form>

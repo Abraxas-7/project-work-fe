@@ -1,65 +1,102 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
-const ContactForm = ({ property_id, reloadReviews }) => {
-    const [email, setEmail] = useState('');
-    const [interest, setInterest] = useState('');
-    const [message, setMessage] = useState('');
-    const [infoRequest, setInfoRequest] = useState('');
+const contactData = {
+    user_email: "",
+    content: "",
+};
+const apiUrl = import.meta.env.VITE_API_URL;
+const contactEndPoint = "properties";
+console.log(apiUrl);
+
+export default function ContactForm() {
+    const { id } = useParams();
+    console.log("ID-Mail:", id);
+
+    const [formData, setFormData] = useState(contactData);
+    const [isFormValid, setFormValid] = useState(true);
+    const [message, setMessage] = useState(true);
     const [showInterestMessage, setShowInterestMessage] = useState(false);
 
-    const handleSubmit = (e) => {
+    console.log(formData);
+
+    function validateForm() {
+        if (!formData.user_email) {
+            setMessage("La mail è obbligatoria.");
+            return false;
+        }
+        if (!formData.content) {
+            setMessage("Devi scrivere le informazioni che vuoi richiedere.");
+            return false;
+        }
+        return true;
+    }
+
+    function handleSubmit(e) {
         e.preventDefault();
 
-        const formData = {
-            email,
-            interest,
-            property_id,
-            infoRequest,
-        };
-
-        // Simulazione di invio (sostituire con la logica vera di invio)
-        console.log('Dati inviati:', formData);
-
-
-        setMessage('Il modulo è stato inviato con successo!');
-
-        // Se l'utente è interessato all'appartamento, mostra il messaggio specifico
-        if (interest === 'interessato') {
-            setShowInterestMessage(true);
+        if (!validateForm()) {
+            setFormValid(false);
+            return;
         }
 
+        console.log('Sto inviando dati a', formData);
 
-        if (reloadReviews) {
-            reloadReviews();
+        if (formData.content === 'informazioni') {
+            formData.content = `Informazioni richieste: ${formData.contentDetails}`;
         }
-    };
+
+        axios.post(`${apiUrl}${contactEndPoint}/${id}/messages`, formData)
+            .then((res) => {
+                console.log('Risposta dell API:', res);
+                setFormValid(true);
+                setFormData(contactData);
+                reloadEmail();
+                setMessage("Il tuo messaggio è stato inviato con successo!");
+                setShowInterestMessage(true);
+            })
+            .catch((error) => {
+                console.log(error);
+                setMessage("Si è verificato un errore durante l'invio del messaggio.");
+            })
+            .finally(() => {
+                console.log("finito");
+            });
+    }
+    function setFieldValue(e) {
+        console.log(e.target.value, e.target.name);
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    }
+    console.log("Dati da inviare:", formData);
 
     return (
         <div className="container mt-5">
             <h2>Modulo di Contatto</h2>
             <p>Sei interessato all'appartamento o hai bisogno di informazioni? Compila il modulo qui sotto.</p>
-
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                    <label htmlFor="email" className="form-label">Indirizzo Email</label>
+                    {/* <label htmlFor="email" className="form-label">Indirizzo Email</label> */}
                     <input
                         type="email"
                         className="form-control"
                         id="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        name='user_email'
+                        value={formData.user_email}
+                        onChange={setFieldValue}
                         placeholder="Inserisci la tua email"
                         required
                     />
                 </div>
-
                 <div className="mb-3">
-                    <label htmlFor="interest" className="form-label">Tipo di richiesta</label>
+                    {/* <label htmlFor="interest" className="form-label">Tipo di richiesta</label> */}
                     <select
                         className="form-select"
-                        id="interest"
-                        value={interest}
-                        onChange={(e) => setInterest(e.target.value)}
+                        id="content"
+                        name='content'
+                        value={formData.content}
+                        onChange={setFieldValue}
                         required
                     >
                         <option value="">Seleziona...</option> {/* Campo vuoto di default */}
@@ -67,28 +104,23 @@ const ContactForm = ({ property_id, reloadReviews }) => {
                         <option value="informazioni">Ho bisogno di informazioni</option>
                     </select>
                 </div>
-
-
-                {interest === 'informazioni' && (
+                {formData.content === 'informazioni' && (
                     <div className="mb-3">
-                        <label htmlFor="infoRequest" className="form-label">Dettagli della richiesta</label>
+                        {/* <label htmlFor="infoRequest" className="form-label">Dettagli della richiesta</label> */}
                         <textarea
                             className="form-control"
-                            id="infoRequest"
+                            id="contentDetails"
+                            name='contentDetails'
                             rows="4"
-                            value={infoRequest}
-                            onChange={(e) => setInfoRequest(e.target.value)}
+                            value={formData.contentDetails || ''}
+                            onChange={setFieldValue}
                             placeholder="Descrivi cosa vuoi sapere"
                         />
                     </div>
                 )}
-
                 <button type="submit" className="btn btn-primary">Invia</button>
             </form>
-
             {message && <div className="alert alert-success mt-3">{message}</div>}
-
-
             {showInterestMessage && (
                 <div className="alert alert-info mt-3">
                     Grazie per il tuo interesse! Verrai contattato dal proprietario tramite l'email che hai fornito.
@@ -97,6 +129,4 @@ const ContactForm = ({ property_id, reloadReviews }) => {
         </div>
     );
 };
-
-export default ContactForm;
 
