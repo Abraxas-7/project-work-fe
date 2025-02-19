@@ -129,7 +129,7 @@ function AddPropertyComponent() {
           <div className="row">
             <div className="col-md-3 col-sm-6 py-3">
               <label htmlFor="rooms" className="form-label">
-                Numero di stanze
+                Inserisci il numero di stanze
               </label>
               <input
                 type="number"
@@ -145,7 +145,7 @@ function AddPropertyComponent() {
 
             <div className="col-md-3 col-sm-6 py-3">
               <label htmlFor="bathrooms" className="form-label">
-                Numero di Bagni
+                Inserisci il numero di Bagni
               </label>
               <input
                 type="number"
@@ -160,24 +160,8 @@ function AddPropertyComponent() {
             </div>
 
             <div className="col-md-3 col-sm-6 py-3">
-              <label htmlFor="square_meters" className="form-label">
-                Metri Quadrati
-              </label>
-              <input
-                type="number"
-                className="form-control"
-                id="square_meters"
-                value={formData.square_meters}
-                onChange={handleChange}
-                min="1"
-                max="1000000"
-                required
-              />
-            </div>
-
-            <div className="col-md-3 col-sm-6 py-3">
               <label htmlFor="beds" className="form-label">
-                Numero letti
+                Inserisci il numero letti
               </label>
               <input
                 type="number"
@@ -187,6 +171,22 @@ function AddPropertyComponent() {
                 onChange={handleChange}
                 min="1"
                 max="255"
+                required
+              />
+            </div>
+
+            <div className="col-md-3 col-sm-6 py-3">
+              <label htmlFor="square_meters" className="form-label">
+                Inserisci i metri quadrati
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="square_meters"
+                value={formData.square_meters}
+                onChange={handleChange}
+                min="1"
+                max="1000000"
                 required
               />
             </div>
@@ -233,7 +233,7 @@ function AddPropertyComponent() {
             <select
               className={"form-select"}
               style={{
-                maxHeight: "150px",
+                maxHeight: "100px",
                 overflowY: "auto",
               }}
               id="adress_hick_town"
@@ -257,7 +257,7 @@ function AddPropertyComponent() {
             <select
               className="form-select"
               style={{
-                maxHeight: "150px",
+                maxHeight: "100px",
                 overflowY: "auto",
               }}
               id="property_type"

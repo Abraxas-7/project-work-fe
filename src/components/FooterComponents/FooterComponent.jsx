@@ -8,30 +8,21 @@ function FooterComponent() {
         <ul className="list-unstyled">
           <span className="fw-bold">Assistenza</span>
           <li>Centro assistenza </li>
-          <li>AirCover</li>
           <li>Antidiscriminazione</li>
           <li>Supporto alla disabilità </li>
           <li>opzioni di cancellazione</li>
-          <li>segnala problema nel quartiere</li>
         </ul>
         <ul className="list-unstyled">
           <span className="fw-bold">Ospitare</span>
-          <li>apri un bnb</li>
-          <li>AirCover per gli host</li>
           <li>Risorse per gli host</li>
           <li>Forum della community</li>
           <li>Ospitare responsabilmente</li>
-          <li>Partecipa a una lezione gratuita sull'ospitalità</li>
-          <li>Trova un co‑host</li>
         </ul>
         <ul className="list-unstyled">
           <span className="fw-bold">AirBnB</span>
           <li>Newsroom</li>
           <li>Nuove funzionalità</li>
-          <li>Opportunità di lavoro</li>
-          <li>Investitori</li>
-          <li>Gift card</li>
-          <li>Soggiorni con Airbnb.org</li>
+          <li>Soggiorni con BoolBnb</li>
         </ul>
       </div>
       <hr />
