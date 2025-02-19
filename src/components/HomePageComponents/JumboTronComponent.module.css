@@ -1,5 +1,6 @@
 .jumbotron {
-  width: 100vw;
+  background-image: url("src/assets/stacked-waves-haikei.png");
+  background-size: 100% 100%;
+  background-position: center;
   height: 40vh;
-  background: url("../../assets/stacked-waves-haikei.svg");
 }
