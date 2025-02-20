@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 function HeaderComponent() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm p-3">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm p-3 fixed-top">
       <div className="container">
         {/* messo navlink come logo del sito  */}
         <NavLink className="navbar-brand text-danger fw-bold" to="/">
