@@ -5,6 +5,7 @@ import ReviewsComponent from "../ReviewsComponents/ReviewsComponent";
 import FormReviews from "../ReviewsComponents/FormReviewComponent";
 import ContactForm from "./ContactFormComponent";
 
+
 const apiUrl = "http://localhost:3000/api/";
 const PropertyEndPoint = "properties";
 console.log(apiUrl);

@@ -2,12 +2,12 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 function HeaderComponent() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm p-3">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm p-3 fixed-top">
       <div className="container">
-
-        <a className="navbar-brand text-danger fw-bold" href="#">
+        {/* messo navlink come logo del sito  */}
+        <NavLink className="navbar-brand text-danger fw-bold" to="/">
           <span className="text-dark">Bool</span>bnb
-        </a>
+        </NavLink>
 
         <button
           className="navbar-toggler"
@@ -24,10 +24,7 @@ function HeaderComponent() {
         <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <NavLink className="nav-link fw-bold" to="/Soggiorni">Soggiorni</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link text-muted" to="/Esperienze">Esperienze</NavLink>
+              <NavLink className="nav-link fw-bold" to="/advancedSearch">Ricerca Avanzata</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link text-muted" to="/Affitta">Affitta con Airbnb</NavLink>
