@@ -24,13 +24,7 @@ function HeaderComponent() {
         <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <NavLink className="nav-link fw-bold" to="/Soggiorni">Soggiorni</NavLink>
-            </li>
-            <li className="nav-item">
               <NavLink className="nav-link fw-bold" to="/advancedSearch">Ricerca Avanzata</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link text-muted" to="/Esperienze">Esperienze</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link text-muted" to="/Affitta">Affitta con Airbnb</NavLink>
