@@ -79,8 +79,7 @@ export default function PropertyDetails() {
                     onClick={() => handleLike(property.id_properties)}
                   >
                     <i className="bi bi-heart-fill"></i>
-                    {property.likes}
-                  
+                    {property.likes}      
             </button>
             {/* DESCRIZIONE BNB  */}
             <section className="container-fluid py-5">
