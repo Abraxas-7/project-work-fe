@@ -3,4 +3,32 @@
   background-size: 100% 100%;
   background-position: center;
   height: 40vh;
+  min-height: 40vh;
+}
+
+.jumbotronText {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.jumbotronTitle {
+  color: white;
+  font-size: 3.5rem;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .jumbotron {
+    min-height: 40vh;
+    padding: 1.5rem 1rem;
+  }
+
+  .jumbotronTitle {
+    font-size: 2.5rem;
+  }
+
+  .jumbotronText {
+    font-size: 1rem;
+  }
 }
