@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import province from "../../data/province";
 import propertyType from "../../data/propertyType";
 
@@ -202,11 +203,16 @@ export default function AdvancedSearchComponent() {
                 <section className="d-flex flex-wrap justify-content-evenly" style={{ width: "75%" }}>
                     {filteredProperties.map((property) => (
                         <div key={property.id_properties} className="card-css">
-                            <div>
-                                <img src={`http://localhost:3000${property.first_image}`} alt={property.title} />
-                            </div>
+                            <NavLink to={`/properties/${property.id_properties}`}>
+                                <img
+                                    src={`http://localhost:3000${property.first_image}`}
+                                    className=""
+                                />
+                            </NavLink>
                             <div className="description p-3">
-                                <h5>{property.title}</h5>
+                                <NavLink style={{ color: "black", textDecoration: "none" }} to={`/properties/${property.id_properties}`}>
+                                    <h5 >{property.title}</h5>
+                                </NavLink>
                                 <div className="d-flex justify-content-between">
                                     <p>{property.host_name}</p>
                                     <button className="heart-but">
