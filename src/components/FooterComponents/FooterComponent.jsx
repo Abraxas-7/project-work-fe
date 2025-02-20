@@ -1,55 +1,46 @@
 import React from "react";
-
+import style from "./FooterComponent.module.css";
+import { FaFacebookF, FaXTwitter, FaInstagram } from "react-icons/fa6";
 function FooterComponent() {
   return (
-    <>
-      <hr />
-      <div className="d-flex justify-content-around">
-        <ul className="list-unstyled">
-          <span className="fw-bold">Assistenza</span>
-          <li>Centro assistenza </li>
-          <li>Antidiscriminazione</li>
-          <li>Supporto alla disabilità </li>
-          <li>opzioni di cancellazione</li>
-        </ul>
-        <ul className="list-unstyled">
-          <span className="fw-bold">Ospitare</span>
-          <li>Risorse per gli host</li>
-          <li>Forum della community</li>
-          <li>Ospitare responsabilmente</li>
-        </ul>
-        <ul className="list-unstyled">
-          <span className="fw-bold">AirBnB</span>
-          <li>Newsroom</li>
-          <li>Nuove funzionalità</li>
-          <li>Soggiorni con BoolBnb</li>
-        </ul>
+    <div className={style.footerContainer}>
+      <div className="d-flex flex-column justify-content-center align-items-center p-5">
+        <h2 className={style.footerTitle}>BoolBnB</h2>
+        <div className={style.footerText}>
+          BoolBnB - Il tuo viaggio inizia qui, la tua pagina invece finisce qui
+        </div>
+        <div className="d-flex ustify-content-center align-items-center gap-3">
+          <div className={style.iconList}>
+            <a
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaInstagram className={style.icon} />
+            </a>
+          </div>
+          <div>
+            <a
+              href="https://www.facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaFacebookF className={style.icon} />
+            </a>
+          </div>
+          <div>
+            <a
+              href="https://www.twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaXTwitter className={style.icon} />
+            </a>
+          </div>
+        </div>
+        <div className="py-3">© 2025 BoolBnB. Tutti i diritti riservati</div>
       </div>
-      <hr />
-      <div className="d-flex justify-content-between">
-        <ul className="list-unstyled d-flex gap-3">
-          <li>© 2025 Boolbnb, Inc</li>
-          <li>privacy</li>
-          <li>termini</li>
-          <li>mappa del sito</li>
-          <li>dettagli azienda</li>
-        </ul>
-        <ul className="list-unstyled d-flex gap-3 align-items-center">
-          <li>italiano IT </li>
-          <li>€EUR</li>
-          <li>
-            {" "}
-            <i className="fa-brands fa-facebook"></i>
-          </li>
-          <li>
-            <i className="fa-brands fa-twitter"></i>
-          </li>
-          <li>
-            <i className="fa-brands fa-instagram"></i>
-          </li>
-        </ul>
-      </div>
-    </>
+    </div>
   );
 }
 

@@ -18,24 +18,32 @@ export default function FormReviews({ reloadReviews }) {
     console.log("ID:", id);
     const [formData, setFormData] = useState(initialData);
     const [isFormValid, setFormValid] = useState(true);
+    const [errorMessage, setErrorMessage] = useState();
+    const today = new Date();
+    const currentDate = today.toLocaleDateString();
 
 
     function validateForm() {
         if (!formData.user_name) {
             setErrorMessage("Il nome utente è obbligatorio.");
+
             return false;
         }
         if (!formData.review_content) {
             setErrorMessage("La recensione è obbligatoria.");
             return false;
         }
-        if (!formData.start_date || !formData.end_date) {
-            setErrorMessage("Le date di inizio e fine sono obbligatorie.");
+        if (!formData.start_date) {
+            setErrorMessage("La data di check-in è obbligatoria.");
             return false;
         }
+        if (!formData.end_date) {
+            setErrorMessage("la data di check-out è obbligatoria.")
+            return false;
+        }
+        setErrorMessage();
         return true;
     }
-
 
 
     function handleSubmit(e) {
@@ -74,9 +82,9 @@ export default function FormReviews({ reloadReviews }) {
                 <h5>Come è andato il tuo soggiorno?</h5>
             </div>
             <div className="card-body">
-                {!isFormValid && (
+                {!isFormValid && errorMessage && (
                     <div className="alert alert-danger mb-3">
-                        Data Form is not valid!
+                        {errorMessage}
                     </div>
                 )}
 
@@ -105,25 +113,25 @@ export default function FormReviews({ reloadReviews }) {
 
                     <div className="form-group d-flex gap-1">
                         <div className="col-6">
-                            {/* <label for="start_date">Check-in</label> */}
+                            <label for="start_date">Check-in</label>
                             <input
                                 type="date"
                                 name="start_date"
                                 className="form-control"
                                 placeholder="check-in"
-                                value={formData.start_date}
+                                value={formData.start_date || currentDate}
                                 onChange={setFieldValue}
                             />
 
                         </div>
                         <div className="col-6">
-                            {/* <label for="end_date">Check-out</label> */}
+                            <label for="end_date">Check-out</label>
                             <input
                                 type="date"
                                 name="end_date"
                                 className="form-control"
 
-                                value={formData.end_date}
+                                value={formData.end_date || currentDate}
                                 onChange={setFieldValue}
                             />
 

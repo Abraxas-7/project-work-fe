@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-import "./AdvancedSearchStyle.css"
 import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import province from "../../data/province";
 import propertyType from "../../data/propertyType";
 
@@ -82,9 +82,16 @@ export default function AdvancedSearchComponent() {
 
     return (
         <>
-            <h1>Ricerca avanzata</h1>
-            <div id="container">
-                <form onSubmit={handleSubmit}>
+            <h1 className="my-6 mx-auto" style={{
+                width: "80%",
+                color: "#dc3545"
+            }}>Ricerca avanzata</h1>
+            <div id="container" className="d-flex justify-content-evenly my-5 mx-auto" style={{ width: "85%" }}>
+                <form style={{
+                    width: "20%",
+                    marginLeft: "50px",
+                    marginRight: "50px"
+                }} onSubmit={handleSubmit}>
                     <div className="mb-2">
                         <label htmlFor="adress_hick_town" className="form-label">
                             Provincia
@@ -193,14 +200,19 @@ export default function AdvancedSearchComponent() {
 
 
                 </form >
-                <section>
+                <section className="d-flex flex-wrap justify-content-evenly" style={{ width: "75%" }}>
                     {filteredProperties.map((property) => (
                         <div key={property.id_properties} className="card-css">
-                            <div>
-                                <img src={`http://localhost:3000${property.first_image}`} alt={property.title} />
-                            </div>
+                            <NavLink to={`/properties/${property.id_properties}`}>
+                                <img
+                                    src={`http://localhost:3000${property.first_image}`}
+                                    className=""
+                                />
+                            </NavLink>
                             <div className="description p-3">
-                                <h5>{property.title}</h5>
+                                <NavLink style={{ color: "black", textDecoration: "none" }} to={`/properties/${property.id_properties}`}>
+                                    <h5 >{property.title}</h5>
+                                </NavLink>
                                 <div className="d-flex justify-content-between">
                                     <p>{property.host_name}</p>
                                     <button className="heart-but">
@@ -214,9 +226,9 @@ export default function AdvancedSearchComponent() {
                             </div>
                         </div>
                     ))}
-                    <h5 className={noResults()}>Nessuna Proprietà soddisfa i requisiti cercati</h5>
+                    <h5 className={noResults()} style={{ color: "rgb(129, 129, 129" }}>Nessuna proprietà soddisfa i requisiti cercati</h5>
                 </section>
-            </div>
+            </div >
 
         </>
     );
