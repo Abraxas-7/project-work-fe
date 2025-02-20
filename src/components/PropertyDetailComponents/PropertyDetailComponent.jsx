@@ -5,8 +5,7 @@ import ReviewsComponent from "../ReviewsComponents/ReviewsComponent";
 import FormReviews from "../ReviewsComponents/FormReviewComponent";
 import ContactForm from "./ContactFormComponent";
 
-
-const apiUrl = import.meta.env.VITE_API_URL;
+const apiUrl = "http://localhost:3000/api/";
 const PropertyEndPoint = "properties";
 console.log(apiUrl);
 
@@ -14,7 +13,7 @@ console.log(apiUrl);
 export default function PropertyDetails() {
     const { id } = useParams();
     const [property, setProperty] = useState({});
-    console.log(property);
+    console.log('property', property);
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -45,7 +44,7 @@ export default function PropertyDetails() {
     function renderReviews() {
         if (property?.reviews?.length > 0) {
 
-            const reviewsToShow = showAllReviews ? property.reviews : property.reviews.slice(0, 3);
+            const reviewsToShow = showAllReviews ? property.reviews : property.reviews.slice(0, 2);
 
             return reviewsToShow.map((review) => (
                 <div className="col-12" key={review.id_review}>
@@ -72,7 +71,7 @@ export default function PropertyDetails() {
             <section className="container-fluid py-5">
                 <div className="row">
 
-                    <div className="col-md-6">
+                    <div className="col-12 col-md-6 col-sm-6">
                         <div className="card p-3">
                             <div className="card bg-danger text-white mb-3">
                                 <div className="card-header text-white">
@@ -80,57 +79,58 @@ export default function PropertyDetails() {
                                 </div>
 
 
-                                <div className=" card d-flex justify-content-center col-4 m-2">
-                                    <p className="text-center"><strong>Mi piace:</strong> {property.likes}</p>
+                                <div className=" card  m-2">
+                                    <p className="m-1">
+                                        <strong>Mi piace:</strong> {property.likes}
+                                    </p>
+                                </div>
+
+                                <div className="col-12 col-sm-6 col-md-12">
+                                    <div className="card m-2">
+                                        <p className="m-1">
+                                            <strong>Host Email:</strong> {property.contact_email}
+                                        </p>
+                                    </div>
                                 </div>
 
                                 <div className="row">
-                                    <div className="col-4">
-                                        <div className=" card d-flex justify-content-center align-items-center m-2">
-                                            <p className="text-center"><strong>Stanze:</strong> {property.rooms}</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-4">
-                                        <div className="card d-flex justify-content-center align-items-center m-2">
-                                            <p><strong>Letti:</strong> {property.beds}</p>
-                                        </div>
-                                    </div>
-                                    <div className="col-4">
-                                        <div className=" card d-flex justify-content-center align-items-center m-2">
-                                            <p><strong>Bagni:</strong> {property.bathrooms}</p>
+                                    <div className="col-12">
+                                        <div className=" card m-2">
+                                            <p className=" m-1">
+                                                <strong>Stanze:</strong> {property.rooms}
+                                                <span className="mx-2">|</span>
+                                                <strong>Letti:</strong> {property.beds}
+                                                <span className="mx-2">|</span>
+                                                <strong>Bagni:</strong> {property.bathrooms}
+                                            </p>
                                         </div>
                                     </div>
 
 
-                                    <div className="col-4">
-                                        <div className="card d-flex justify-content-center align-items-center m-2">
-                                            <p><strong>Tipo di immobile:</strong> {property.property_type}</p>
+                                    <div className="col-12">
+                                        <div className="card m-2">
+                                            <p className="m-1">
+                                                <strong>Tipo di immobile:</strong> {property.property_type}
+                                                <span className="mx-2">|</span>
+                                                <strong>m²:</strong> {property.square_meters}
+                                            </p>
                                         </div>
                                     </div>
 
-                                    <div className="col-4">
-                                        <div className="card d-flex justify-content-center align-items-center m-2">
-                                            <p><strong>Metri Quadri:</strong> {property.square_meters}</p>
+                                    <div className="col-12">
+                                        <div className="card mt-2 mb-4 ms-2 me-2">
+                                            <p className="m-1">
+                                                <strong>Indirizzo:</strong> {property.adress_road}
+                                                <span className="mx-2">|</span>
+                                                <strong>Città:</strong> {property.adress_city}
+                                                <span className="mx-2">|</span>
+                                                <strong>Provincia:</strong> {property.adress_hick_town}
+                                            </p>
                                         </div>
-                                    </div>
-
-
-
-
-                                    <div className="d-flex mb-3 ">
-                                        <p><strong>Indirizzo:</strong> {property.adress_road}</p>
-                                        <p className="mx-5"><strong>Città:</strong> {property.adress_city}</p>
-                                        <p className="mx-5"><strong>Provincia:</strong> {property.adress_hick_town}</p>
-                                    </div>
-
-                                    <div className="mb-3">
-                                        <p><strong>Email:</strong> {property.contact_email}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
 
@@ -147,10 +147,18 @@ export default function PropertyDetails() {
             </section >
 
 
-
             {/* REVIEWS */}
-            <section className="container-fluid py-5" >
+            <section className="container-fluid " >
                 <div className="row">
+                    <div className="col-md-6">
+                        <div className="card">
+                            <div className="card-body">
+                                <FormReviews properties_id={property.id_properties} reloadReviews={getData} />
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div className="col-md-6">
                         <div className="card">
                             <div className="card-body">
@@ -163,8 +171,8 @@ export default function PropertyDetails() {
                                         {renderReviews()}
                                     </div>
                                     <div className="m-auto">
-                                        {property?.reviews?.length > 3 && (
-                                            <button type="button" className=" d-flex btn btn-light text-dark btn-sm m-3" onClick={() => setShowAllReviews(!showAllReviews)}>
+                                        {property?.reviews?.length > 2 && (
+                                            <button type="button" className=" d-flex btn btn-light text-dark m-3" onClick={() => setShowAllReviews(!showAllReviews)}>
                                                 {showAllReviews ? 'Mostra meno recensioni' : 'Mostra tutte le recensioni'}
                                             </button>
                                         )}
@@ -176,13 +184,7 @@ export default function PropertyDetails() {
                     </div>
 
 
-                    <div className="col-md-6">
-                        <div className="card">
-                            <div className="card-body">
-                                <FormReviews properties_id={property.id_properties} reloadReviews={getData} />
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </section>
         </>
