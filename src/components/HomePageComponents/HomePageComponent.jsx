@@ -57,7 +57,7 @@ function HomePageComponent() {
                 <p>Host:<strong> {property.host_name}</strong> </p>
                 <div className="d-flex justify-content-between align-items-center">
                   <div className="address-container">
-                    <p className="troncate">{property.adress_city}, {property.adress_road} </p>
+                    <p className="troncate ">{property.adress_city}, {property.adress_road} </p>
                   </div>
                   <div>
                     <button className="heart-but" onClick={() => handleLike(property.id_properties)}><i className="bi bi-heart-fill"></i>{property.likes}</button>

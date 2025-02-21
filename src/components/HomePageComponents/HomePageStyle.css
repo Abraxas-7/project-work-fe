@@ -34,7 +34,7 @@ body {
 }
 
 .address-container{
-    max-width: 70%;
+    max-width: 70% ;
 }
 .truncate{
     white-space: nowrap;
