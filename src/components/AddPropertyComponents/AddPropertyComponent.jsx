@@ -18,6 +18,7 @@ function AddPropertyComponent() {
     adress_road: "",
     adress_city: "",
     adress_hick_town: "",
+    property_description: "",
   });
 
   const [images, setImages] = useState([]);
@@ -190,6 +191,21 @@ function AddPropertyComponent() {
                 required
               />
             </div>
+
+            <div className="py-3">
+              <label htmlFor="property_description" className="form-label">
+                Inserisci una descrizione dettagliata dell'immobile
+              </label>
+              <textarea
+                className="form-control"
+                id="property_description"
+                name="property_description"
+                value={formData.property_description}
+                onChange={handleChange}
+                rows="6"
+                required
+              />
+            </div>
           </div>
         </div>
 
@@ -281,7 +297,7 @@ function AddPropertyComponent() {
         </div>
 
         <div className="py-3 row d-flex justify-content-center">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-danger">
             Aggiungi
           </button>
         </div>

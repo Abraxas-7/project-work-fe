@@ -3,8 +3,9 @@ import axios from "axios";
 import './HomePageStyle.css'
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { NavLink } from "react-router-dom";
-import JumboTronComponent from './JumboTronComponent'
 
+import JumboTronComponent from "./JumboTronComponent";
+import Loader from "../LoaderComponents/Loader";
 
 function HomePageComponent() {
   const [properties, setProperties] = useState([])
@@ -38,9 +39,8 @@ function HomePageComponent() {
 }
 
 
-  if (loading) return (
-    <p>Stiamo Caricando i dati</p>
-  )
+
+  if (loading) return <Loader />;
 
   return (
     <>
