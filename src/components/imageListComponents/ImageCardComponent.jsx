@@ -37,6 +37,7 @@ function ImageCardComponent({ image }) {
         breakpoint: 576, // SM: max-width 576px
         settings: {
           slidesToShow: 3, // Mostra 3 card
+          dots: false, // Nascondi i pallini
         },
       },
     ],
