@@ -29,14 +29,14 @@ function HomePageComponent() {
   const handleLike = (id) => {
     console.log(id)
     const response = axios.patch(`http://localhost:3000/api/properties/${id}/likes`)
-    .then
-      setProperties(prev => 
-        prev.map(property =>
-          property.id_properties === id ? {...property, likes: property.likes+1} : property
-        )
+      .then
+    setProperties(prev =>
+      prev.map(property =>
+        property.id_properties === id ? { ...property, likes: property.likes + 1 } : property
       )
-    
-}
+    )
+
+  }
 
 
 
@@ -50,7 +50,7 @@ function HomePageComponent() {
           {properties.map((property) => (
             <div key={property.id_properties} className="card-css" /*style={{width: '15rem'}}*/>
               <NavLink to={`/properties/${property.id_properties}`}>
-                <img src={property.first_image} className="" />
+                <img src={`http://localhost:3000${property.first_image}`} className="img-fluid" alt={property.title} />
               </NavLink>
               <div className="description">
                 <p className="troncate"><strong>{property.title}</strong></p>
