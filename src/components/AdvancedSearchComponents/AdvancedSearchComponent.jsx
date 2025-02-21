@@ -1,7 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import province from "../../data/province";
 import propertyType from "../../data/propertyType";
@@ -10,16 +8,14 @@ export default function AdvancedSearchComponent() {
     const [properties, setProperties] = useState([]);
     const [filteredProperties, setFilteredProperties] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [searchParams, setSearchParams] = useSearchParams();
-
+    const [inputValue, setInputValue] = useState('');
+    const [bedsNum, setBedsNum] = useState('');
+    const [bathNum, setBathNum] = useState('');
+    const [minmq, setMinmq] = useState('');
+    const [maxmq, setMaxmq] = useState('');
     const [formData, setFormData] = useState({
-        adress_hick_town: searchParams.get("adress_hick_town") || '',
-        property_type: searchParams.get("property_type") || '',
-        city: searchParams.get("city") || '',
-        bedsNum: searchParams.get("bedsNum") || '',
-        bathNum: searchParams.get("bathNum") || '',
-        minmq: searchParams.get("minmq") || '',
-        maxmq: searchParams.get("maxmq") || ''
+        adress_hick_town: '',
+        property_type: ''
     });
 
     useEffect(() => {
@@ -31,80 +27,90 @@ export default function AdvancedSearchComponent() {
             })
             .catch((err) => {
                 setLoading(false);
-                console.error(err);
+                console.log(err);
             });
     }, []);
 
     useEffect(() => {
         const filtered = properties.filter((item) => {
             return (
-                item.adress_city.toLowerCase().includes(formData.city.toLowerCase()) &&
-                (!formData.bedsNum || item.beds == formData.bedsNum) &&
-                (!formData.bathNum || item.bathrooms == formData.bathNum) &&
-                (!formData.minmq || item.square_meters >= formData.minmq) &&
-                (!formData.maxmq || item.square_meters <= formData.maxmq) &&
+                item.adress_city.toLowerCase().includes(inputValue.toLowerCase()) &&
+                (!bedsNum || item.beds == bedsNum) &&
+                (!bathNum || item.bathrooms == bathNum) &&
+                (!minmq || item.square_meters >= minmq) &&
+                (!maxmq || item.square_meters <= maxmq) &&
                 (!formData.adress_hick_town || item.adress_hick_town == formData.adress_hick_town) &&
                 (!formData.property_type || item.property_type == formData.property_type)
             );
         });
         setFilteredProperties(filtered);
-        setSearchParams(formData);
-    }, [formData, properties]);
+    }, [inputValue, bedsNum, bathNum, minmq, maxmq, properties, formData.adress_hick_town, formData.property_type]);
 
+    const handleInputChange = (event) => {
+        setInputValue(event.target.value);
+    };
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+        setFormData({ ...formData, [name]: value });
+    };
+    const handleSubmit = (event) => {
+        event.preventDefault();
     };
 
     return (
-        <>
-            <h1 className="my-6 mx-auto" style={{ width: "80%", color: "#dc3545" }}>Ricerca avanzata</h1>
-            <div id="container" className="d-flex justify-content-evenly my-5 mx-auto" style={{ width: "85%" }}>
-                <form style={{ width: "20%", marginLeft: "50px", marginRight: "50px" }}>
-                    <div className="mb-2">
-                        <label htmlFor="adress_hick_town" className="form-label">Provincia</label>
-                        <select className="form-select" id="adress_hick_town" name="adress_hick_town" value={formData.adress_hick_town} onChange={handleChange}>
-                            <option value="">Seleziona...</option>
-                            {province.map((provincia) => (
-                                <option key={provincia.code} value={provincia.code}>{provincia.name} ({provincia.code})</option>
-                            ))}
-                        </select>
-                    </div>
-                    <div className="mb-2">
-                        <label htmlFor="property_type" className="form-label">Tipo di Proprietà</label>
-                        <select className="form-select" id="property_type" name="property_type" value={formData.property_type} onChange={handleChange}>
-                            <option value="">Seleziona...</option>
-                            {propertyType.map((type) => (
-                                <option key={type} value={type}>{type}</option>
-                            ))}
-                        </select>
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="city" className="form-label">Città</label>
-                        <input type="text" className="form-control" id="city" name="city" value={formData.city} onChange={handleChange} placeholder="Inserisci città" />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="bedsNum" className="form-label">Num. Letti</label>
-                        <input type="number" className="form-control" id="bedsNum" name="bedsNum" value={formData.bedsNum} onChange={handleChange} min={1} />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="bathNum" className="form-label">Num. Bagni</label>
-                        <input type="number" className="form-control" id="bathNum" name="bathNum" value={formData.bathNum} onChange={handleChange} min={1} />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="minmq" className="form-label">Metri quadri</label>
-                        <input type="number" className="form-control" id="minmq" name="minmq" value={formData.minmq} onChange={handleChange} placeholder="min" min={1} />
-                        <input type="number" className="form-control" id="maxmq" name="maxmq" value={formData.maxmq} onChange={handleChange} placeholder="max" min={1} />
+        <div className="container mt-4">
+            <h1 className="text-center text-danger mb-4">Ricerca avanzata</h1>
+            <div className="row flex-column flex-lg-row">
+                <form className="col-lg-3 mb-4 mb-lg-0" onSubmit={handleSubmit}>
+                    <div className="row g-2">
+                        <div className="col-12">
+                            <label className="form-label">Provincia</label>
+                            <select className="form-select" name="adress_hick_town" value={formData.adress_hick_town} onChange={handleChange}>
+                                <option value="">Seleziona...</option>
+                                {province.map((provincia) => (
+                                    <option key={provincia.code} value={provincia.code}>{provincia.name} ({provincia.code})</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="col-12">
+                            <label className="form-label">Tipo di Proprietà</label>
+                            <select className="form-select" name="property_type" value={formData.property_type} onChange={handleChange}>
+                                <option value="">Seleziona...</option>
+                                {propertyType.map((type) => (
+                                    <option key={type} value={type}>{type}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="col-12">
+                            <label className="form-label">Città</label>
+                            <input type="text" className="form-control" value={inputValue} onChange={handleInputChange} placeholder="Inserisci città" />
+                        </div>
+                        <div className="col-12">
+                            <label className="form-label">Num. Letti</label>
+                            <input type="number" className="form-control" value={bedsNum} onChange={(e) => setBedsNum(e.target.value)} min={1} />
+                        </div>
+                        <div className="col-12">
+                            <label className="form-label">Num. Bagni</label>
+                            <input type="number" className="form-control" value={bathNum} onChange={(e) => setBathNum(e.target.value)} min={1} />
+                        </div>
+                        <div className="col-12">
+                            <label className="form-label">Metri quadri (min)</label>
+                            <input type="number" className="form-control" value={minmq} onChange={(e) => setMinmq(e.target.value)} min={1} />
+                        </div>
+                        <div className="col-12">
+                            <label className="form-label">Metri quadri (max)</label>
+                            <input type="number" className="form-control" value={maxmq} onChange={(e) => setMaxmq(e.target.value)} min={1} />
+                        </div>
                     </div>
                 </form>
-                <section className="d-flex flex-wrap justify-content-evenly" style={{ width: "75%" }}>
+                <section className="col-lg-9 d-flex flex-wrap justify-content-evenly">
                     {filteredProperties.map((property) => (
-                        <div key={property.id_properties} className="card-css">
+                        <div key={property.id_properties} className="card-css mb-3">
                             <NavLink to={`/properties/${property.id_properties}`}>
-                                <img src={`http://localhost:3000${property.first_image}`} alt={property.title} />
+                                <img src={`http://localhost:3000${property.first_image}`} className="img-fluid" alt={property.title} />
                             </NavLink>
                             <div className="description p-3">
-                                <NavLink to={`/properties/${property.id_properties}`} style={{ color: "black", textDecoration: "none" }}>
+                                <NavLink style={{ color: "black", textDecoration: "none" }} to={`/properties/${property.id_properties}`}>
                                     <h5>{property.title}</h5>
                                 </NavLink>
                                 <div className="d-flex gap-2">
@@ -115,11 +121,10 @@ export default function AdvancedSearchComponent() {
                         </div>
                     ))}
                     {filteredProperties.length === 0 && (
-                        <h5 style={{ color: "rgb(129, 129, 129)" }}>Nessuna proprietà soddisfa i requisiti cercati</h5>
+                        <h5 className="text-muted">Nessuna proprietà soddisfa i requisiti cercati</h5>
                     )}
                 </section>
-
             </div>
-        </>
+        </div>
     );
 }
