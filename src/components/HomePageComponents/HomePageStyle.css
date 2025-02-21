@@ -2,7 +2,7 @@ body{
     font-size: 1em;
 }
 .card-css {
-    width: 300px;
+    width: 326px;
     max-height: auto;
     display: flex;
     flex-direction: column;
@@ -11,8 +11,8 @@ body{
   }
   
   .card-css img {
-    width: 300px;
-    height: 300px;
+    width: 326px;
+    height: 310px;
     object-fit: cover;
     object-position: center;
     border-radius: 14px;

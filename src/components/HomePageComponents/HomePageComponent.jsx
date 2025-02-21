@@ -3,7 +3,7 @@ import axios from "axios";
 import './HomePageStyle.css'
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { NavLink } from "react-router-dom";
-
+import JumboTronComponent from './JumboTronComponent'
 
 
 function HomePageComponent() {
@@ -43,29 +43,32 @@ function HomePageComponent() {
   )
 
   return (
-    <div className="container-fluid ">
-      <div className="d-flex flex-wrap justify-content-center m-3 gap-3 gy-6">
-        {properties.map((property) => (
-          <div key={property.id_properties} className="card-css" /*style={{width: '15rem'}}*/>
-            <NavLink to={`/properties/${property.id_properties}`}>
-              <img src={property.first_image} className="" />
-            </NavLink>
-            <div className="description">
-              <p><strong>{property.title}</strong></p>
-              <p>Host:{property.host_name}</p>
-              <div className="d-flex justify-content-between align-items-center">
-                <div>
-                  <p>{property.adress_city}, {property.adress_road} </p>
-                </div>
-                <div>
-                  <button className="heart-but" onClick={() => handleLike(property.id_properties)}><i className="bi bi-heart-fill"></i>{property.likes}</button>
+    <>
+      <JumboTronComponent />
+      <div className="container-fluid ">
+        <div className="d-flex flex-wrap justify-content-center m-3 gap-4 gy-6">
+          {properties.map((property) => (
+            <div key={property.id_properties} className="card-css" /*style={{width: '15rem'}}*/>
+              <NavLink to={`/properties/${property.id_properties}`}>
+                <img src={property.first_image} className="" />
+              </NavLink>
+              <div className="description">
+                <p><strong>{property.title}</strong></p>
+                <p>Host:{property.host_name}</p>
+                <div className="d-flex justify-content-between align-items-center">
+                  <div>
+                    <p>{property.adress_city}, {property.adress_road} </p>
+                  </div>
+                  <div>
+                    <button className="heart-but" onClick={() => handleLike(property.id_properties)}><i className="bi bi-heart-fill"></i>{property.likes}</button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
