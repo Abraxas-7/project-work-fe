@@ -53,11 +53,11 @@ function HomePageComponent() {
                 <img src={property.first_image} className="" />
               </NavLink>
               <div className="description">
-                <p><strong>{property.title}</strong></p>
-                <p>Host:{property.host_name}</p>
+                <p className="troncate"><strong>{property.title}</strong></p>
+                <p>Host:<strong> {property.host_name}</strong> </p>
                 <div className="d-flex justify-content-between align-items-center">
-                  <div>
-                    <p>{property.adress_city}, {property.adress_road} </p>
+                  <div className="address-container">
+                    <p className="troncate">{property.adress_city}, {property.adress_road} </p>
                   </div>
                   <div>
                     <button className="heart-but" onClick={() => handleLike(property.id_properties)}><i className="bi bi-heart-fill"></i>{property.likes}</button>

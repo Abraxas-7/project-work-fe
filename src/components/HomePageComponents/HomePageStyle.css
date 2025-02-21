@@ -33,6 +33,15 @@ body {
   margin: 0px !important;
 }
 
+.address-container{
+    max-width: 70%;
+}
+.truncate{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
 /* BOTTONE */
 .heart-but {
   border: 1px solid red;
