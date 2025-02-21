@@ -16,9 +16,16 @@ export default function PropertyDetails() {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const [showAllReviews, setShowAllReviews] = useState(false);
 
+  const handleLike = () => {
+    const response = axios.patch(`${apiUrl}${PropertyEndPoint}/${id}/likes`);
+
+    setProperty((prev) => ({
+      ...prev,
+      likes: prev.likes + 1,
+    }));
+  };
   useEffect(getData, [id]);
   function getData() {
     setLoading(true);
@@ -27,6 +34,7 @@ export default function PropertyDetails() {
       .then((res) => {
         console.log(res.data);
         setProperty(res.data.item);
+        setLikes(res.data.item.likes);
       })
       .catch((error) => {
         console.log(error);
@@ -64,7 +72,13 @@ export default function PropertyDetails() {
     <>
       {/* IMMAGINE */}
       <ImageListComponent images={property?.images || []} />
-
+      <button
+        className="heart-but"
+        onClick={() => handleLike(property.id_properties)}
+      >
+        <i className="bi bi-heart-fill"></i>
+        {property.likes}
+      </button>
       {/* DESCRIZIONE BNB  */}
       <section className="container-fluid py-5">
         <div className="row">
