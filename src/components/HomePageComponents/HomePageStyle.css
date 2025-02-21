@@ -3,6 +3,56 @@ body {
 }
 
 .card-css {
+    width: 326px;
+    max-height: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .card-css img {
+    width: 326px;
+    height: 310px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 14px;
+  }
+  
+  .description {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    padding-top: 5px;
+    gap: 2px;
+  }
+
+  .description p{
+    margin: 0px !important;
+  }
+  /* BOTTONE */
+  .heart-but{
+    border: 1px solid red;
+    border-radius: 10px;
+    background-color: transparent;
+    padding: 3px;
+    gap:5px;
+    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: red;
+    font-family: italic;
+  }
+  .heart-but:hover{
+    border: 1px solid white;
+    color: white;
+    background-color: red;
+  }
+  
+=======
   width: 300px;
   height: 450px;
   display: flex;
