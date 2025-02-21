@@ -29,3 +29,8 @@
   ); /* Stessa sfumatura al passaggio del mouse */
   transform: scale(1.1); /* Leggera animazione di ingrandimento */
 }
+
+*:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
