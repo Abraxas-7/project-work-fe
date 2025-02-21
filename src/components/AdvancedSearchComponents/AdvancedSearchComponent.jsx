@@ -110,6 +110,12 @@ export default function AdvancedSearchComponent() {
                                 <NavLink style={{ color: "black", textDecoration: "none" }} to={`/properties/${property.id_properties}`}>
                                     <h5>{property.title}</h5>
                                 </NavLink>
+                                <div className="d-flex justify-content-between">
+                                    <p>{property.host_name}</p>
+                                    <button className="heart-but">
+                                        <i className="bi bi-heart-fill"></i>{property.likes}
+                                    </button>
+                                </div>
                                 <div className="d-flex gap-2">
                                     <p>{property.adress_city},</p>
                                     <p>{property.adress_road}</p>
