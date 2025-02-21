@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
+import { NavLink, useSearchParams } from "react-router-dom";
 import province from "../../data/province";
 import propertyType from "../../data/propertyType";
 
 export default function AdvancedSearchComponent() {
+    const [searchParams, setSearchParams] = useSearchParams();
     const [properties, setProperties] = useState([]);
     const [filteredProperties, setFilteredProperties] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [inputValue, setInputValue] = useState('');
-    const [bedsNum, setBedsNum] = useState('');
-    const [bathNum, setBathNum] = useState('');
-    const [minmq, setMinmq] = useState('');
-    const [maxmq, setMaxmq] = useState('');
+
+    // Stato sincronizzato con i parametri dell'URL
     const [formData, setFormData] = useState({
-        adress_hick_town: '',
-        property_type: ''
+        adress_hick_town: searchParams.get("adress_hick_town") || "",
+        property_type: searchParams.get("property_type") || "",
+        city: searchParams.get("city") || "",
+        bedsNum: searchParams.get("bedsNum") || "",
+        bathNum: searchParams.get("bathNum") || "",
+        minmq: searchParams.get("minmq") || "",
+        maxmq: searchParams.get("maxmq") || ""
     });
 
     useEffect(() => {
@@ -32,36 +35,30 @@ export default function AdvancedSearchComponent() {
     }, []);
 
     useEffect(() => {
-        const filtered = properties.filter((item) => {
-            return (
-                item.adress_city.toLowerCase().includes(inputValue.toLowerCase()) &&
-                (!bedsNum || item.beds == bedsNum) &&
-                (!bathNum || item.bathrooms == bathNum) &&
-                (!minmq || item.square_meters >= minmq) &&
-                (!maxmq || item.square_meters <= maxmq) &&
-                (!formData.adress_hick_town || item.adress_hick_town == formData.adress_hick_town) &&
-                (!formData.property_type || item.property_type == formData.property_type)
-            );
-        });
+        const filtered = properties.filter((item) => (
+            item.adress_city.toLowerCase().includes(formData.city.toLowerCase()) &&
+            (!formData.bedsNum || item.beds == formData.bedsNum) &&
+            (!formData.bathNum || item.bathrooms == formData.bathNum) &&
+            (!formData.minmq || item.square_meters >= formData.minmq) &&
+            (!formData.maxmq || item.square_meters <= formData.maxmq) &&
+            (!formData.adress_hick_town || item.adress_hick_town == formData.adress_hick_town) &&
+            (!formData.property_type || item.property_type == formData.property_type)
+        ));
         setFilteredProperties(filtered);
-    }, [inputValue, bedsNum, bathNum, minmq, maxmq, properties, formData.adress_hick_town, formData.property_type]);
+    }, [formData, properties]);
 
-    const handleInputChange = (event) => {
-        setInputValue(event.target.value);
-    };
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setFormData({ ...formData, [name]: value });
-    };
-    const handleSubmit = (event) => {
-        event.preventDefault();
+        const newFormData = { ...formData, [name]: value };
+        setFormData(newFormData);
+        setSearchParams(newFormData);
     };
 
     return (
         <div className="container mt-4">
             <h1 className="text-center text-danger mb-4">Ricerca avanzata</h1>
             <div className="row flex-column flex-lg-row">
-                <form className="col-lg-3 mb-4 mb-lg-0" onSubmit={handleSubmit}>
+                <form className="col-lg-3 mb-4 mb-lg-0">
                     <div className="row g-2">
                         <div className="col-12">
                             <label className="form-label">Provincia</label>
@@ -83,23 +80,23 @@ export default function AdvancedSearchComponent() {
                         </div>
                         <div className="col-12">
                             <label className="form-label">Città</label>
-                            <input type="text" className="form-control" value={inputValue} onChange={handleInputChange} placeholder="Inserisci città" />
+                            <input type="text" className="form-control" name="city" value={formData.city} onChange={handleChange} placeholder="Inserisci città" />
                         </div>
                         <div className="col-12">
                             <label className="form-label">Num. Letti</label>
-                            <input type="number" className="form-control" value={bedsNum} onChange={(e) => setBedsNum(e.target.value)} min={1} />
+                            <input type="number" className="form-control" name="bedsNum" value={formData.bedsNum} onChange={handleChange} min={1} />
                         </div>
                         <div className="col-12">
                             <label className="form-label">Num. Bagni</label>
-                            <input type="number" className="form-control" value={bathNum} onChange={(e) => setBathNum(e.target.value)} min={1} />
+                            <input type="number" className="form-control" name="bathNum" value={formData.bathNum} onChange={handleChange} min={1} />
                         </div>
                         <div className="col-12">
                             <label className="form-label">Metri quadri (min)</label>
-                            <input type="number" className="form-control" value={minmq} onChange={(e) => setMinmq(e.target.value)} min={1} />
+                            <input type="number" className="form-control" name="minmq" value={formData.minmq} onChange={handleChange} min={1} />
                         </div>
                         <div className="col-12">
                             <label className="form-label">Metri quadri (max)</label>
-                            <input type="number" className="form-control" value={maxmq} onChange={(e) => setMaxmq(e.target.value)} min={1} />
+                            <input type="number" className="form-control" name="maxmq" value={formData.maxmq} onChange={handleChange} min={1} />
                         </div>
                     </div>
                 </form>
