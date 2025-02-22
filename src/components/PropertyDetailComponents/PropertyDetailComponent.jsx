@@ -72,15 +72,9 @@ export default function PropertyDetails() {
         <>
             {/* IMMAGINE */}
             <ImageListComponent images={property?.images || []} />
-            <button
-                className="heart-but"
-                onClick={() => handleLike(property.id_properties)}
-            >
-                <i className="bi bi-heart-fill"></i>
-                {property.likes}
-            </button>
-            {/* DESCRIZIONE BNB  */}
-            <section className="container-fluid py-5">
+
+            {/* DESCRIZIONE BNB  LARGE */}
+            <section className="container-fluid py-5 d-none d-md-block">
                 <div className="row">
                     <div className="col-12 col-md-6 col-sm-6">
                         <div className="card p-3">
@@ -89,7 +83,7 @@ export default function PropertyDetails() {
                                     <h5>{property.title}</h5>
                                 </div>
 
-                                <div className="card m-2" style={{ width: "60px", borderRadius: "22px" }}>
+                                <div className="card m-2" style={{ width: "80px", borderRadius: "15px" }}>
                                     <p className="m-1">
                                         <button
                                             className="heart-but"
@@ -101,11 +95,7 @@ export default function PropertyDetails() {
                                     </p>
 
                                 </div>
-                                <div className=" card  m-2">
-                                    <p className="m-1">
-                                        <strong>Mi piace:</strong> {property.likes}
-                                    </p>
-                                </div>
+
 
                                 <div className="col-12 col-sm-6 col-md-12">
                                     <div className="card m-2">
@@ -165,9 +155,91 @@ export default function PropertyDetails() {
                     </div>
                 </div>
             </section>
+            {/* DESCRIZIONE BNB SMALL */}
+            <section className="container-fluid py-5 d-block d-md-none">
+                <div className="row">
+                    <div className="col-12 col-md-6 col-sm-6">
+                        <div className="card p-3">
+                            <div className="card bg-danger text-white mb-3">
+                                <div className="card-header text-white">
+                                    <h5>{property.title}</h5>
+                                </div>
 
-            {/* REVIEWS */}
-            <section className="container-fluid ">
+                                <div className="card m-2" style={{ width: "80px", borderRadius: "15px" }}>
+                                    <p className="m-1">
+                                        <button
+                                            className="heart-but"
+                                            onClick={() => handleLike(property.id_properties)}
+                                        >
+                                            <i className="bi bi-heart-fill"></i>
+                                            {property.likes}
+                                        </button>
+                                    </p>
+
+                                </div>
+
+
+                                <div className="col-12 col-sm-6 col-md-12">
+                                    <div className="card m-2">
+                                        <p className="m-1">
+                                            {property.contact_email}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div className=" card m-2">
+                                            <p className=" m-1">
+                                                <strong>Stanze:</strong> {property.rooms}
+                                                <span className="mx-2">|</span>
+                                                <strong>Letti:</strong> {property.beds}
+                                                <span className="mx-2">|</span>
+                                                <strong>Bagni:</strong> {property.bathrooms}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="col-12">
+                                        <div className="card m-2">
+                                            <p className="m-1">
+
+                                                {property.property_type}
+                                                <span className="mx-2">|</span>
+                                                <strong>m²:</strong> {property.square_meters}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="col-12">
+                                        <div className="card mt-2 mb-4 ms-2 me-2">
+                                            <p className="m-1">
+                                                {property.adress_road}
+                                                <span className="mx-2">|</span>
+                                                {property.adress_city}
+                                                <span className="mx-2">|</span>
+                                                {property.adress_hick_town}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* CONTACT FORM */}
+                    <div className="col-md-6 mt-5">
+                        <div className="card">
+                            <div className="card-body">
+                                <ContactForm />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* REVIEWS LARGE*/}
+            <section className="container-fluid d-none d-md-block">
                 <div className="row">
                     <div className="col-md-6">
                         <div className="card">
@@ -181,6 +253,49 @@ export default function PropertyDetails() {
                     </div>
 
                     <div className="col-md-6">
+                        <div className="card">
+                            <div className="card-body">
+                                <div className="card text-white bg-danger mb-3">
+                                    <div className="card-header">
+                                        <h5>Le vostre recensioni</h5>
+                                    </div>
+
+                                    <div className=" m-3 row">{renderReviews()}</div>
+                                    <div className="m-auto">
+                                        {property?.reviews?.length > 2 && (
+                                            <button
+                                                type="button"
+                                                className=" d-flex btn btn-light text-dark m-3"
+                                                onClick={() => setShowAllReviews(!showAllReviews)}
+                                            >
+                                                {showAllReviews
+                                                    ? "Mostra meno recensioni"
+                                                    : "Mostra tutte le recensioni"}
+                                            </button>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* REVIEWS SMALL*/}
+            <section className="container-fluid d-block d-md-none ">
+                <div className="row">
+                    <div className="col-md-6">
+                        <div className="card">
+                            <div className="card-body">
+                                <FormReviews
+                                    properties_id={property.id_properties}
+                                    reloadReviews={getData}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="col-md-6 mt-5">
                         <div className="card">
                             <div className="card-body">
                                 <div className="card text-white bg-danger mb-3">
