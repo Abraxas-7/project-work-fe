@@ -57,7 +57,7 @@ function HeaderComponent() {
                 to="/advancedSearch"
                 style={{ fontSize: "1.1rem" }}
               >
-                Ricerca Avanzata
+                Cerca...
               </NavLink>
             </li>
             <li className="nav-item">

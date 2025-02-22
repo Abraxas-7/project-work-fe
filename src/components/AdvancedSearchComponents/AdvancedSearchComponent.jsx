@@ -54,9 +54,21 @@ export default function AdvancedSearchComponent() {
         setSearchParams(newFormData);
     };
 
+    const handleLike = (id) => {
+        console.log(id)
+        const response = axios.patch(`http://localhost:3000/api/properties/${id}/likes`)
+            .then
+        setProperties(prev =>
+            prev.map(property =>
+                property.id_properties === id ? { ...property, likes: property.likes + 1 } : property
+            )
+        )
+
+    }
+
     return (
         <div className="container mt-4">
-            <h1 className="text-center text-danger mb-4">Ricerca avanzata</h1>
+            <h1 className="text-center text-danger mb-4">Trova il posto giusto a tuo</h1>
             <div className="row flex-column flex-lg-row">
                 <form className="col-lg-3 mb-4 mb-lg-0">
                     <div className="row g-2">
@@ -112,9 +124,7 @@ export default function AdvancedSearchComponent() {
                                 </NavLink>
                                 <div className="d-flex justify-content-between">
                                     <p>{property.host_name}</p>
-                                    <button className="heart-but">
-                                        <i className="bi bi-heart-fill"></i>{property.likes}
-                                    </button>
+                                    <button className="heart-but" onClick={() => handleLike(property.id_properties)}><i className="bi bi-heart-fill"></i>{property.likes}</button>
                                 </div>
                                 <div className="d-flex gap-2">
                                     <p>{property.adress_city},</p>
