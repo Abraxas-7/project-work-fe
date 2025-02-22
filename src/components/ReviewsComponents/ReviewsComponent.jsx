@@ -30,15 +30,21 @@ export default function ReviewsComponent({ review }) {
 
     return (
 
-        <div key={id_review} className="card col-12 mb-3">
+        <div key={id_review} className="card col-12 mb-3 ">
             <div className="card-body d-flex gap-3">
-                <div className="col-2">
+                <div className="col-2 d-none d-md-block">
                     <div className="card-text">
                         <div>{user_name}</div>
                     </div>
-
                 </div>
-                <div className="col-10">
+                <div className="d-block d-md-none">
+                    <div className="card-text">
+                        <div>{user_name}</div>
+                    </div>
+                </div>
+
+                {/* DISPLAY LARGE */}
+                <div className="col-10 d-none d-md-block">
                     <div>
                         <small>Data di creazione della recensione: {dateString}</small>
                     </div>
@@ -46,6 +52,14 @@ export default function ReviewsComponent({ review }) {
                         {/* <small>Ora di creazione: </small> {timeString} */}</div>
                     <div className="card-text"><strong>{review_content}</strong></div>
                     <small>Soggiorno effettuato da {startDate} a {endDate} per {differenceDays} giorno/i </small>
+                </div>
+
+                {/* DISPLAY SMALL */}
+                <div className="col-10 d-block d-md-none">
+                    <div className="card-text">
+                        {/* <small>Ora di creazione: </small> {timeString} */}</div>
+                    <div className="card-text"><strong>{review_content}</strong></div>
+                    <small>Da {startDate} a {endDate} Per {differenceDays} giorno/i </small>
                 </div>
             </div>
         </div >
