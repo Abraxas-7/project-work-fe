@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import DefaultLayout from "./layout/DefaultLayout";
-
+import ScrollToTop from "./components/ScrollBarComponents/ScrollToTop";
 import HomePage from "./pages/HomePage";
 import PropertyDetails from "./pages/PropertyDetails";
 import AdvancedSearch from "./pages/AdvancedSearch";
@@ -10,6 +9,7 @@ import AddProperty from "./pages/AddProperty";
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<DefaultLayout />}>
           <Route index element={<HomePage />} />
