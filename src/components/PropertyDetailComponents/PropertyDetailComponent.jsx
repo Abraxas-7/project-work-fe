@@ -274,7 +274,7 @@ export default function PropertyDetails() {
             </section>
 
             {/* REVIEWS LARGE*/}
-            <section className="container-fluid d-none d-md-block">
+            <section className="container-fluid d-none d-md-block mb-5">
                 <div className="row">
                     <div className="col-md-6">
                         <div className="card">
@@ -298,7 +298,7 @@ export default function PropertyDetails() {
                                     </div>
 
                                     <div className=" m-3 row">{renderReviews()}</div>
-                                    <div className="m-auto">
+                                    <div className="">
                                         {property?.reviews?.length > 2 && (
                                             <button
                                                 type="button"
@@ -319,7 +319,7 @@ export default function PropertyDetails() {
             </section>
 
             {/* REVIEWS SMALL*/}
-            <section className="container-fluid d-block d-md-none ">
+            <section className="container-fluid d-block d-md-none mb-5 ">
                 <div className="row">
                     <div className="col-md-6">
                         <div className="card">
@@ -336,12 +336,10 @@ export default function PropertyDetails() {
                         <div className="card">
                             <div className="card-body">
                                 <div className="card text-white bg-danger mb-3">
-                                    <div className="card-header">
-                                        <div className="card-header d-flex justify-content-between">
-                                            <h5>Cosa dicono i nostri ospiti</h5>
-                                            {/* <h5>({property?.reviews?.length})</h5> */}
+                                    <div className="card-header d-flex justify-content-center">
+                                        <h5>Cosa dicono i nostri ospiti</h5>
+                                        {/* <h5>({property?.reviews?.length})</h5> */}
 
-                                        </div>
                                     </div>
 
                                     <div className=" m-3 row">{renderReviews()}</div>

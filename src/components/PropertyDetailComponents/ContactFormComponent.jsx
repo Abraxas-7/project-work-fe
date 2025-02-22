@@ -76,10 +76,17 @@ export default function ContactForm() {
 
     return (
         <div className="card text-white bg-danger mb-3">
-            <div className='card-header'>
+            <div className='card-header  d-none d-md-block'>
                 <h5>Modulo di Contatto</h5>
             </div>
-            <div className='m-3'>
+            <div className='card-header d-flex justify-content-center d-block d-md-none'>
+                <h5>Modulo di Contatto</h5>
+            </div>
+            <div className='m-3 d-none d-md-block'>
+                <h6>Sei interessato all'appartamento o hai bisogno di informazioni? </h6>
+                <h6>Compila il modulo qui sotto.</h6>
+            </div>
+            <div className='m-3 d-flex row justify-content-center d-block d-md-none'>
                 <h6>Sei interessato all'appartamento o hai bisogno di informazioni? </h6>
                 <h6>Compila il modulo qui sotto.</h6>
             </div>
