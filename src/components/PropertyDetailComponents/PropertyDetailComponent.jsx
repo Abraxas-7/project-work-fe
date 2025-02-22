@@ -17,6 +17,7 @@ export default function PropertyDetails() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showAllReviews, setShowAllReviews] = useState(false);
+    const [showAlldescription, setShowAlldescription] = useState(false);
 
     const handleLike = () => {
         const response = axios.patch(`${apiUrl}${PropertyEndPoint}/${id}/likes`);
@@ -70,18 +71,55 @@ export default function PropertyDetails() {
 
     return (
         <>
+            {/* TITOLO */}
+            <div className="d-flex justify-content-center mt-5">
+                <h1><strong>{property.title}</strong></h1>
+            </div>
+
             {/* IMMAGINE */}
             <ImageListComponent images={property?.images || []} />
 
-            {/* DESCRIZIONE BNB  LARGE */}
+            {/* DESCRIZIONE BNB LARGE */}
+            <section className="container bg-danger text-white p-1 d-none d-md-block ">
+                <div className="card p-3 ">
+                    <p>{property.property_description}</p>
+                </div>
+            </section>
+
+            {/* DESCRIZIONE BNB SMALL */}
+            <section className="container-fluid d-block d-md-none">
+                <div className="p-3 ">
+                    <p>
+                        {property?.property_description?.length > 0 ? (
+                            showAlldescription
+                                ? property.property_description
+                                : `${property.property_description.substring(0, 200)}...`
+                        ) : (
+                            "Descrizione non disponibile."
+                        )}
+                    </p>
+                    <div className="d-flex justify-content-center">
+                        {property?.property_description?.length > 200 && (
+
+                            <button
+                                type="button"
+                                className=" btn btn-danger text-white"
+                                onClick={() => setShowAlldescription(!showAlldescription)}
+                            >
+                                {showAlldescription ? "Descrizione - " : "Descrizione + "}
+                            </button>
+                        )}
+                    </div>
+                </div>
+            </section>
+
+            {/* DATI BNB LARGE */}
             <section className="container-fluid py-5 d-none d-md-block">
                 <div className="row">
                     <div className="col-12 col-md-6 col-sm-6">
                         <div className="card p-3">
                             <div className="card bg-danger text-white mb-3">
-                                <div className="card-header text-white">
-                                    <h5>{property.title}</h5>
-                                </div>
+
 
                                 <div className="card m-2" style={{ width: "80px", borderRadius: "15px" }}>
                                     <p className="m-1">
@@ -100,7 +138,7 @@ export default function PropertyDetails() {
                                 <div className="col-12 col-sm-6 col-md-12">
                                     <div className="card m-2">
                                         <p className="m-1">
-                                            <strong>Host Email:</strong> {property.contact_email}
+                                            <strong>Host</strong> {property.host_name}
                                         </p>
                                     </div>
                                 </div>
@@ -155,34 +193,31 @@ export default function PropertyDetails() {
                     </div>
                 </div>
             </section>
-            {/* DESCRIZIONE BNB SMALL */}
-            <section className="container-fluid py-5 d-block d-md-none">
+            {/* DATI BNB SMALL */}
+            <section className="container-fluid d-block d-md-none">
                 <div className="row">
                     <div className="col-12 col-md-6 col-sm-6">
                         <div className="card p-3">
                             <div className="card bg-danger text-white mb-3">
-                                <div className="card-header text-white">
-                                    <h5>{property.title}</h5>
-                                </div>
-
-                                <div className="card m-2" style={{ width: "80px", borderRadius: "15px" }}>
-                                    <p className="m-1">
-                                        <button
-                                            className="heart-but"
-                                            onClick={() => handleLike(property.id_properties)}
-                                        >
-                                            <i className="bi bi-heart-fill"></i>
-                                            {property.likes}
-                                        </button>
-                                    </p>
-
+                                <div className="d-flex justify-content-center align-items-center">
+                                    <div className="card  m-2" style={{ width: "80px", borderRadius: "15px" }}>
+                                        <p className=" m-1">
+                                            <button
+                                                className=" heart-but"
+                                                onClick={() => handleLike(property.id_properties)}
+                                            >
+                                                <i className="bi bi-heart-fill"></i>
+                                                {property.likes}
+                                            </button>
+                                        </p>
+                                    </div>
                                 </div>
 
 
                                 <div className="col-12 col-sm-6 col-md-12">
                                     <div className="card m-2">
-                                        <p className="m-1">
-                                            {property.contact_email}
+                                        <p className="m-1 text-center">
+                                            {property.host_name}
                                         </p>
                                     </div>
                                 </div>
@@ -190,7 +225,7 @@ export default function PropertyDetails() {
                                 <div className="row">
                                     <div className="col-12">
                                         <div className=" card m-2">
-                                            <p className=" m-1">
+                                            <p className=" m-1 text-center">
                                                 <strong>Stanze:</strong> {property.rooms}
                                                 <span className="mx-2">|</span>
                                                 <strong>Letti:</strong> {property.beds}
@@ -202,7 +237,7 @@ export default function PropertyDetails() {
 
                                     <div className="col-12">
                                         <div className="card m-2">
-                                            <p className="m-1">
+                                            <p className=" text-center m-1">
 
                                                 {property.property_type}
                                                 <span className="mx-2">|</span>
@@ -213,7 +248,7 @@ export default function PropertyDetails() {
 
                                     <div className="col-12">
                                         <div className="card mt-2 mb-4 ms-2 me-2">
-                                            <p className="m-1">
+                                            <p className="m-1 text-center">
                                                 {property.adress_road}
                                                 <span className="mx-2">|</span>
                                                 {property.adress_city}
@@ -228,7 +263,7 @@ export default function PropertyDetails() {
                     </div>
 
                     {/* CONTACT FORM */}
-                    <div className="col-md-6 mt-5">
+                    <div className="col-md-6 mt-5 mb-5">
                         <div className="card">
                             <div className="card-body">
                                 <ContactForm />
@@ -256,8 +291,10 @@ export default function PropertyDetails() {
                         <div className="card">
                             <div className="card-body">
                                 <div className="card text-white bg-danger mb-3">
-                                    <div className="card-header">
-                                        <h5>Le vostre recensioni</h5>
+                                    <div className="card-header d-flex justify-content-between">
+                                        <h5>Cosa dicono i nostri ospiti</h5>
+                                        <h5> Recensioni: {property?.reviews?.length}
+                                        </h5>
                                     </div>
 
                                     <div className=" m-3 row">{renderReviews()}</div>
@@ -270,7 +307,7 @@ export default function PropertyDetails() {
                                             >
                                                 {showAllReviews
                                                     ? "Mostra meno recensioni"
-                                                    : "Mostra tutte le recensioni"}
+                                                    : `Mostra tutte le recensioni (${property.reviews.length})`}
                                             </button>
                                         )}
                                     </div>
@@ -300,7 +337,11 @@ export default function PropertyDetails() {
                             <div className="card-body">
                                 <div className="card text-white bg-danger mb-3">
                                     <div className="card-header">
-                                        <h5>Le vostre recensioni</h5>
+                                        <div className="card-header d-flex justify-content-between">
+                                            <h5>Cosa dicono i nostri ospiti</h5>
+                                            {/* <h5>({property?.reviews?.length})</h5> */}
+
+                                        </div>
                                     </div>
 
                                     <div className=" m-3 row">{renderReviews()}</div>
@@ -313,7 +354,7 @@ export default function PropertyDetails() {
                                             >
                                                 {showAllReviews
                                                     ? "Mostra meno recensioni"
-                                                    : "Mostra tutte le recensioni"}
+                                                    : `Mostra tutte le recensioni (${property.reviews.length})`}
                                             </button>
                                         )}
                                     </div>
