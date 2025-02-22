@@ -114,22 +114,19 @@ export default function AdvancedSearchComponent() {
                 </form>
                 <section className="col-lg-9 d-flex flex-wrap justify-content-evenly">
                     {filteredProperties.map((property) => (
-                        <div key={property.id_properties} className="card-css mb-3">
+                        <div key={property.id_properties} className="card-css" /*style={{width: '15rem'}}*/>
                             <NavLink to={`/properties/${property.id_properties}`}>
                                 <img src={`http://localhost:3000${property.first_image}`} className="img-fluid" alt={property.title} />
                             </NavLink>
-                            <div className="description p-3">
-                                <NavLink style={{ color: "black", textDecoration: "none" }} to={`/properties/${property.id_properties}`}>
-                                    <h5>{property.title}</h5>
-                                </NavLink>
+                            <div className="description mb-5">
+                                <p className="truncate"><strong>{property.title}</strong></p>
                                 <div className="d-flex justify-content-between">
-                                    <p>{property.host_name}</p>
+                                    <p><span>msq: {property.square_meters}m²</span></p>
+                                    <p><span>Letti: {property.beds}</span></p>
+                                    <p><span>Bagni: {property.bathrooms}</span></p>
                                     <button className="heart-but" onClick={() => handleLike(property.id_properties)}><i className="bi bi-heart-fill"></i>{property.likes}</button>
                                 </div>
-                                <div className="d-flex gap-2">
-                                    <p>{property.adress_city},</p>
-                                    <p>{property.adress_road}</p>
-                                </div>
+                                <p>{property.adress_city}, {property.adress_road}</p>
                             </div>
                         </div>
                     ))}
@@ -141,3 +138,4 @@ export default function AdvancedSearchComponent() {
         </div>
     );
 }
+
