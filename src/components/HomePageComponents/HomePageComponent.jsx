@@ -44,8 +44,11 @@ function HomePageComponent() {
 
   return (
     <>
-      <JumboTronComponent />
+      <JumboTronComponent />     
       <div className="container-fluid ">
+        <div className="title-most-liked d-flex justify-content-center m-5 text-center">
+          <h3>I più amati dalla community di BooleanBnB</h3>
+        </div>
         <div className="d-flex flex-wrap justify-content-center m-3 gap-4 gy-6">
           {properties.map((property) => (
             <div key={property.id_properties} className="card-css" /*style={{width: '15rem'}}*/>
