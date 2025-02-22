@@ -11,7 +11,7 @@ export default function JumboTronComponent() {
           BoolBnB puoi trovare soggiorni incredibili in ogni angolo del mondo,
           dalle metropoli vibranti ai rifugi più nascosti. Che tu cerchi
           avventura o relax, siamo qui per rendere il tuo viaggio
-          indimenticabile
+          indimenticabile.
         </div>
       </div>
     </div>
