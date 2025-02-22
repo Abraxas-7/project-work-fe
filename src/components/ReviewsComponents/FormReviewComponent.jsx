@@ -21,6 +21,8 @@ export default function FormReviews({ reloadReviews }) {
     const [errorMessage, setErrorMessage] = useState();
     const today = new Date();
     const currentDate = today.toLocaleDateString();
+    const checkInDate = new Date(formData.start_date);
+    const checkOutDate = new Date(formData.end_date);
 
 
     function validateForm() {
@@ -41,6 +43,19 @@ export default function FormReviews({ reloadReviews }) {
             setErrorMessage("la data di check-out è obbligatoria.")
             return false;
         }
+        if (checkInDate > today.setHours(0, 0, 0, 0)) {
+            setErrorMessage('La data di check-in non può essere superiore alla data odierna.');
+            return false;
+        }
+        if (checkOutDate > today.setHours(0, 0, 0, 0)) {
+            setErrorMessage('La data di check-out non può essere superiore alla data odierna.');
+            return false;
+        }
+        if (checkOutDate <= checkInDate) {
+            setErrorMessage('La data di check-out deve essere successiva al check-in.');
+            return false;
+        }
+
         setErrorMessage();
         return true;
     }
@@ -83,9 +98,12 @@ export default function FormReviews({ reloadReviews }) {
             </div>
             <div className="card-body">
                 {!isFormValid && errorMessage && (
-                    <div className="alert alert-danger mb-3">
-                        {errorMessage}
+                    <div className="alert alert-warning alert-dismissible fade show mb-3" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        <strong> Oops!  </strong> {errorMessage}
+                        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
+
                 )}
 
                 <form
@@ -139,6 +157,11 @@ export default function FormReviews({ reloadReviews }) {
 
                     </div>
                     <div className="d-flex pt-3">
+                        <button type="submit" className="btn btn-light text-dark d-none d-md-block">
+                            Invia la tua recensione
+                        </button>
+                    </div>
+                    <div className="d-flex justify-content-center pt-3 d-block d-md-none ">
                         <button type="submit" className="btn btn-light text-dark">
                             Invia la tua recensione
                         </button>

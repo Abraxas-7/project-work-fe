@@ -56,7 +56,7 @@ export default function ContactForm() {
                 setFormValid(true);
                 setFormData(contactData);
                 // reloadEmail();
-                setErrorMessage("Il tuo messaggio è stato inviato con successo!");
+                setErrorMessage();
                 setShowInterestMessage(true);
             })
             .catch((error) => {
@@ -76,10 +76,17 @@ export default function ContactForm() {
 
     return (
         <div className="card text-white bg-danger mb-3">
-            <div className='card-header'>
+            <div className='card-header  d-none d-md-block'>
                 <h5>Modulo di Contatto</h5>
             </div>
-            <div className='m-3'>
+            <div className='card-header d-flex justify-content-center d-block d-md-none'>
+                <h5>Modulo di Contatto</h5>
+            </div>
+            <div className='m-3 d-none d-md-block'>
+                <h6>Sei interessato all'appartamento o hai bisogno di informazioni? </h6>
+                <h6>Compila il modulo qui sotto.</h6>
+            </div>
+            <div className='m-3 d-flex row justify-content-center d-block d-md-none'>
                 <h6>Sei interessato all'appartamento o hai bisogno di informazioni? </h6>
                 <h6>Compila il modulo qui sotto.</h6>
             </div>
@@ -128,17 +135,29 @@ export default function ContactForm() {
                             />
                         </div>
                     )}
-                    <button type="submit" className="btn btn-light text-dark">Invia la tua richiesta</button>
+                    <button type="submit" className="btn btn-light text-dark d-none d-md-block">Invia la tua richiesta</button>
+                    <div className='d-block d-md-none d-flex justify-content-center'>
+                        <button type="submit" className="btn btn-light text-dark ">Invia la tua richiesta</button>
+                    </div>
+
                 </form>
             </div>
 
-            {message && <div className="alert alert-success m-3">{message}</div>}
-            {showInterestMessage && (
-                <div className="alert alert-info m-3">
-                    Grazie per l'interesse! Verrai contattato dal proprietario tramite l'email che hai fornito.
+            {message && (
+                <div>
+                    {message}
                 </div>
             )}
+            {showInterestMessage && (
+                <div className="alert alert-success alert-dismissible fade show m-3 shadow-lg rounded" role="alert">
+                    <i className="bi bi-check-circle-fill me-2"></i>
+                    Richiesta inviata con successo! Verrai contattato dal proprietario tramite l'email che hai fornito.
+                    <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            )}
+
         </div>
+
     );
 };
 
