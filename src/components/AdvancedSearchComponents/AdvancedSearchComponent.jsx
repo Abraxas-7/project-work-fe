@@ -68,7 +68,7 @@ export default function AdvancedSearchComponent() {
 
     return (
         <div className="container mt-4">
-            <h1 className="text-center text-danger mb-4">Trova il posto giusto a tuo</h1>
+            <h1 className="text-center text-danger mb-4">Trova il posto giusto a tuo gusto</h1>
             <div className="row flex-column flex-lg-row">
                 <form className="col-lg-3 mb-4 mb-lg-0">
                     <div className="row g-2">
