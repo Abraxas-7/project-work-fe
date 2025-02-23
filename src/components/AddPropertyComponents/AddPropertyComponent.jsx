@@ -1,11 +1,16 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Loader from "../LoaderComponents/Loader";
 import ImageUpload from "./ImageUploadComponent";
 
 import province from "../../data/province";
 import propertyType from "../../data/propertyType";
 
 function AddPropertyComponent() {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     title: "",
     host_name: "",
@@ -32,8 +37,8 @@ function AddPropertyComponent() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     console.log(formData);
+    setLoading(true);
 
     try {
       const response1 = await axios.post(
@@ -61,8 +66,12 @@ function AddPropertyComponent() {
       );
 
       console.log("Seconda risposta:", response2.data);
+
+      navigate(`/properties/${newPropertyId}`);
     } catch (error) {
       console.error("Errore nella richiesta:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
