@@ -104,7 +104,7 @@ export default function FormReviews({ reloadReviews }) {
             className="alert alert-warning alert-dismissible fade show mb-3"
             role="alert"
           >
-            <i className="bi bi-exclamation-triangle-fill"></i>
+            <i className ="bi bi-exclamation-triangle-fill"></i>
             <strong> Oops! </strong> {errorMessage}
             <button
               type="button"
