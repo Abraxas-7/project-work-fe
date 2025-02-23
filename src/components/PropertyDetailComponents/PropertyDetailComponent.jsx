@@ -116,11 +116,10 @@ export default function PropertyDetails() {
             {/* DATI BNB LARGE */}
             <section className="container-fluid py-5 d-none d-md-block">
                 <div className="row">
-                    <div className="col-12 col-md-6 col-sm-6">
+
+                    <div className="col-12 col-md-6">
                         <div className="card p-3">
                             <div className="card bg-danger text-white mb-3">
-
-
                                 <div className="card m-2" style={{ width: "80px", borderRadius: "15px" }}>
                                     <p className="m-1">
                                         <button
@@ -131,11 +130,10 @@ export default function PropertyDetails() {
                                             {property.likes}
                                         </button>
                                     </p>
-
                                 </div>
 
 
-                                <div className="col-12 col-sm-6 col-md-12">
+                                <div className="col-12 col-sm-6 col-md-12 mb-2">
                                     <div className="card m-2">
                                         <p className="m-1">
                                             <strong>Host</strong> {property.host_name}
@@ -144,9 +142,9 @@ export default function PropertyDetails() {
                                 </div>
 
                                 <div className="row">
-                                    <div className="col-12">
-                                        <div className=" card m-2">
-                                            <p className=" m-1">
+                                    <div className="col-12 mb-2">
+                                        <div className="card m-2">
+                                            <p className="m-1">
                                                 <strong>Stanze:</strong> {property.rooms}
                                                 <span className="mx-2">|</span>
                                                 <strong>Letti:</strong> {property.beds}
@@ -156,18 +154,17 @@ export default function PropertyDetails() {
                                         </div>
                                     </div>
 
-                                    <div className="col-12">
+                                    <div className="col-12 mb-2">
                                         <div className="card m-2">
                                             <p className="m-1">
-                                                <strong>Tipo di immobile:</strong>{" "}
-                                                {property.property_type}
+                                                <strong>Tipo di immobile:</strong> {property.property_type}
                                                 <span className="mx-2">|</span>
                                                 <strong>m²:</strong> {property.square_meters}
                                             </p>
                                         </div>
                                     </div>
 
-                                    <div className="col-12">
+                                    <div className="col-12 mb-3">
                                         <div className="card mt-2 mb-4 ms-2 me-2">
                                             <p className="m-1">
                                                 <strong>Indirizzo:</strong> {property.adress_road}
@@ -183,7 +180,7 @@ export default function PropertyDetails() {
                         </div>
                     </div>
 
-                    {/* CONTACT FORM */}
+                    {/* Colonna con form di contatto */}
                     <div className="col-md-6">
                         <div className="card">
                             <div className="card-body">
@@ -193,8 +190,10 @@ export default function PropertyDetails() {
                     </div>
                 </div>
             </section>
+
+
             {/* DATI BNB SMALL */}
-            <section className="container-fluid d-block d-md-none">
+            <section section className="container-fluid d-block d-md-none" >
                 <div className="row">
                     <div className="col-12 col-md-6 col-sm-6">
                         <div className="card p-3">
@@ -271,10 +270,10 @@ export default function PropertyDetails() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* REVIEWS LARGE*/}
-            <section className="container-fluid d-none d-md-block mb-5">
+            <section section className="container-fluid d-none d-md-block mb-5" >
                 <div className="row">
                     <div className="col-md-6">
                         <div className="card">
@@ -316,10 +315,10 @@ export default function PropertyDetails() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* REVIEWS SMALL*/}
-            <section className="container-fluid d-block d-md-none mb-5 ">
+            <section section className="container-fluid d-block d-md-none mb-5 " >
                 <div className="row">
                     <div className="col-md-6">
                         <div className="card">
@@ -361,7 +360,7 @@ export default function PropertyDetails() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
         </>
     );
 }
