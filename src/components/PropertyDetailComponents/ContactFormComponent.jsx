@@ -6,7 +6,7 @@ const contactData = {
     user_email: "",
     content: "",
 };
-const apiUrl = import.meta.env.VITE_API_URL;
+const apiUrl = "http://localhost:3000/api/";
 const contactEndPoint = "properties";
 console.log(apiUrl);
 
