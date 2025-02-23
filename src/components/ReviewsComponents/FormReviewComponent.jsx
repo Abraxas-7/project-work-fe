@@ -99,7 +99,7 @@ export default function FormReviews({ reloadReviews }) {
             <div className="card-body">
                 {!isFormValid && errorMessage && (
                     <div className="alert alert-warning alert-dismissible fade show mb-3" role="alert">
-                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        <i className="bi bi-exclamation-triangle-fill"></i>
                         <strong> Oops!  </strong> {errorMessage}
                         <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>

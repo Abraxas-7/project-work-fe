@@ -100,7 +100,6 @@ export default function PropertyDetails() {
                     </p>
                     <div className="d-flex justify-content-center">
                         {property?.property_description?.length > 200 && (
-
                             <button
                                 type="button"
                                 className=" btn btn-danger text-white"
