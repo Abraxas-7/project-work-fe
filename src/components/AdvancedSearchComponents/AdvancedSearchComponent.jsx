@@ -69,8 +69,8 @@ export default function AdvancedSearchComponent() {
     return (
         <div className="container mt-4">
             <h1 className="text-center text-danger mb-4">Trova il posto giusto a tuo gusto</h1>
-            <div className="row flex-column flex-lg-row">
-                <form className="col-lg-3 mb-4 mb-lg-0">
+            <div className="row flex-column flex-lg-row" style={{ minHeight: "80vh" }}>
+                <form className="col-lg-3 mb-4 mb-lg-0 ">
                     <div className="row g-2">
                         <div className="col-12">
                             <label className="form-label">Provincia</label>
@@ -104,11 +104,11 @@ export default function AdvancedSearchComponent() {
                         </div>
                         <div className="col-12">
                             <label className="form-label">Metri quadri (min)</label>
-                            <input type="number" className="form-control" name="minmq" value={formData.minmq} onChange={handleChange} min={1} />
+                            <input type="number" className="form-control" name="minmq" value={formData.minmq} onChange={handleChange} min={1} max={formData.maxmq} />
                         </div>
                         <div className="col-12">
                             <label className="form-label">Metri quadri (max)</label>
-                            <input type="number" className="form-control" name="maxmq" value={formData.maxmq} onChange={handleChange} min={1} />
+                            <input type="number" className="form-control" name="maxmq" value={formData.maxmq} onChange={handleChange} min={formData.minmq} />
                         </div>
                     </div>
                 </form>

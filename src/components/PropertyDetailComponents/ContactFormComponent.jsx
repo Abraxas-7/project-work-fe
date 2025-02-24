@@ -47,7 +47,7 @@ export default function ContactForm() {
             formData.content = `Informazioni richieste: ${formData.contentDetails}`;
         }
         else {
-            formData.content = `L'utente ${formData.user_email} è interessato all'acquisto dell'appartamento`;
+            formData.content = `L'utente ${formData.user_email} è interessato all'affitto dell'appartamento`;
         }
 
         axios.post(`${apiUrl}${contactEndPoint}/${id}/messages`, formData)
@@ -117,7 +117,7 @@ export default function ContactForm() {
                             required
                         >
                             <option value="">Seleziona...</option> {/* Campo vuoto di default */}
-                            <option value="interessato">Sono interessato a comprare l'appartamento</option>
+                            <option value="interessato">Sono interessato ad affittare l'appartamento</option>
                             <option value="informazioni">Avrei bisogno di informazioni...</option>
                         </select>
                     </div>
